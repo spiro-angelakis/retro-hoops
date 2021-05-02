@@ -8,17 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "AdMob",
+"language": "GDScript",
+"path": "res://admob-lib/admob.gd"
+} ]
 _global_script_class_icons={
+"AdMob": "res://admob-lib/icon.png"
 }
 
 [application]
 
 config/name="Retro Hoops"
 config/description="3D Pixel Retro Arcade Style Basketball Hoop Shooter."
-run/main_scene="res://scene/GameUI.tscn"
+run/main_scene="res://scene/Boot.tscn"
+config/use_custom_user_dir=true
+boot_splash/image="res://icon.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
+config/auto_accept_quit=false
+config/quit_on_go_back=false
+
+[autoload]
+
+Data="*res://Data.gd"
+GameBrain="*res://GameBrain.gd"
 
 [display]
 
@@ -37,4 +52,5 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
+environment/default_clear_color=Color( 0.92549, 0.521569, 0, 1 )
 environment/default_environment="res://default_env.tres"

@@ -1,7 +1,7 @@
 extends Spatial
 
 
-var ball_prefab = load("res://scene/prefab/Basketball.tscn").duplicate()
+var ball_prefab = preload("res://scene/prefab/Basketball.tscn").duplicate()
 
 var holding_ball = false
 var ball = null
@@ -9,6 +9,8 @@ var ball = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("game")
+	GameBrain.playing_game = true
+	GameBrain.current_game_parent = self
 
 func hold_ball(pos3d):
 	if !holding_ball:
@@ -26,4 +28,7 @@ func move_ball(pos2d):
 func shoot_ball(xdir, ydir):
 	holding_ball = false
 	ball.mode = RigidBody.MODE_RIGID
-	ball.apply_impulse(ball.global_transform.origin, Vector3(rand_range(-3,3), rand_range(1,12), rand_range(-8,-16)))
+	ball.apply_impulse(ball.global_transform.origin, Vector3(rand_range(-1,1) + xdir, rand_range(1,2) + (ydir * 0.2), rand_range(-4,-8) + -(ydir * 0.15)))
+
+func can_close():
+	get_tree().quit()
