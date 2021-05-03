@@ -14,3 +14,8 @@ func _process(delta):
 
 func win():
 	anim.play("win")
+
+
+func _on_BallReturnArea_body_entered(body):
+	if body.is_in_group("ball"):
+		body.grabbed()

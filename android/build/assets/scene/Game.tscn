@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://scene/prefab/BallHoop.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/particle/ticket.png" type="Texture" id=1]
 [ext_resource path="res://scene/Game.gd" type="Script" id=2]
 [ext_resource path="res://scene/prefab/cage/Cage1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/prefab/window/WindowFull.tscn" type="PackedScene" id=4]
@@ -53,11 +53,36 @@ normal_texture = SubResource( 4 )
 [sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.109804, 0.109804, 0.109804, 1 )
 
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_rotate_y = true
+direction = Vector3( 1, 0, -5 )
+spread = 93.14
+flatness = 0.23
+gravity = Vector3( 0, -8, 0 )
+angular_velocity_random = 1.0
+radial_accel_random = 0.66
+damping = 8.0
+damping_random = 1.0
+angle = 8.0
+angle_random = 1.0
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_texture = ExtResource( 1 )
+emission_enabled = true
+emission = Color( 1, 0.470588, 0, 1 )
+emission_energy = 0.09
+emission_operator = 0
+emission_on_uv2 = false
+uv1_scale = Vector3( 3, 2, 1 )
+
+[sub_resource type="CubeMesh" id=9]
+material = SubResource( 8 )
+size = Vector3( 1, 0.05, 0.5 )
+
 [node name="Game" type="Spatial"]
 script = ExtResource( 2 )
-
-[node name="BallHoop" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 0.986518, -0.163653, 0, 0.163653, 0.986518, 0, 0.873115, -2.57575 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80639, 13.1022 )
@@ -76,6 +101,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.89698, -2.56008 )
 [node name="RoomSkin" type="Spatial" parent="."]
 
 [node name="CSGCombiner" type="CSGCombiner" parent="RoomSkin"]
+use_collision = true
 
 [node name="wall" type="CSGBox" parent="RoomSkin/CSGCombiner"]
 transform = Transform( 0.987052, 0, -0.160398, 0, 1, 0, 0.160398, 0, 0.987052, -8.60741, 7.20377, -1.12867 )
@@ -120,3 +146,24 @@ material = SubResource( 6 )
 
 [node name="WindowFull" parent="RoomSkin" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0535, -14.3954 )
+
+[node name="HoopFocus" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.671862, 3.66973 )
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07381, -2.981 )
+
+[node name="StreakTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TicketParticles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+emitting = false
+one_shot = true
+explosiveness = 0.43
+randomness = 0.72
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 9 )
+
+[connection signal="timeout" from="StreakTimer" to="." method="_on_StreakTimer_timeout"]

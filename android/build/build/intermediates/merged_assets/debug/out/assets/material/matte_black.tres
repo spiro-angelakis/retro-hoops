@@ -1,0 +1,7 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+params_diffuse_mode = 4
+albedo_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+metallic = 0.18
+roughness = 0.98

@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/mesh/Basket1.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/texture/backboard/backboard1.png" type="Texture" id=2]
+[ext_resource path="res://scene/prefab/hoop/BallHoop.gd" type="Script" id=3]
+[ext_resource path="res://assets/texture/net/fishnet1.png" type="Texture" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 2, 2, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+albedo_color = Color( 0.356863, 0.886275, 0.937255, 0.796078 )
+metallic = 0.48
+roughness = 0.56
+
+[sub_resource type="SpatialMaterial" id=3]
+next_pass = SubResource( 2 )
+flags_transparent = true
+albedo_color = Color( 1, 0.67451, 0.67451, 1 )
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 3, 2, 2 )
+
+[sub_resource type="ConvexPolygonShape" id=4]
+points = PoolVector3Array( -1, 1, 0.1, 1, 1, -0.1, 1, 1, 0.1, -1, 1, -0.1, -1, -1, 0.1, 1, -1, -0.1, 1, -1, 0.1, -1, -1, -0.1, 1, 1, 0.1, -1, 1, -0.1, 1, 1, -0.1, -1, 1, 0.1, 1, -1, 0.1, -1, -1, -0.1, 1, -1, -0.1, -1, -1, 0.1, 1, 1, 0.1, -1, -1, 0.1, -1, 1, 0.1, 1, -1, 0.1, 1, 1, -0.1, -1, -1, -0.1, -1, 1, -0.1, 1, -1, -0.1 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.376471, 0.376471, 0.376471, 1 )
+metallic = 0.35
+roughness = 0.36
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+metallic = 0.09
+metallic_texture = ExtResource( 4 )
+roughness = 0.85
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.199442, 0.0901451, 0.189233 )
+
+[node name="BallHoop2" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Backboard" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02347, -0.875929 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Backboard"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Backboard"]
+shape = SubResource( 4 )
+
+[node name="Hoop" type="CSGCombiner" parent="."]
+material_override = SubResource( 5 )
+use_collision = true
+
+[node name="CSGTorus" type="CSGTorus" parent="Hoop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326065, 0.336911 )
+inner_radius = 0.874355
+outer_radius = 1.03282
+
+[node name="CSGBox" type="CSGBox" parent="Hoop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30669, -0.742859 )
+width = 0.841784
+height = 0.2
+depth = 0.362351
+
+[node name="SoftBody" type="SoftBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.291609, 0.336902 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 6 )
+drag_coefficient = 0.22
+pinned_points = [ 280, 337, 444, 51, 3, 106, 178, 226 ]
+attachments/0/point_index = 280
+attachments/0/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/0/offset = Vector3( -0.7071, -0.117674, -0.707109 )
+attachments/1/point_index = 337
+attachments/1/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/1/offset = Vector3( 0, -0.117674, -1.00001 )
+attachments/2/point_index = 444
+attachments/2/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/2/offset = Vector3( 0.7071, -0.117674, -0.707109 )
+attachments/3/point_index = 51
+attachments/3/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/3/offset = Vector3( 1, -0.117674, -9.0003e-06 )
+attachments/4/point_index = 3
+attachments/4/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/4/offset = Vector3( 0.7071, -0.117674, 0.707091 )
+attachments/5/point_index = 106
+attachments/5/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/5/offset = Vector3( 0, -0.117674, 0.999991 )
+attachments/6/point_index = 178
+attachments/6/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/6/offset = Vector3( -0.7071, -0.117674, 0.707091 )
+attachments/7/point_index = 226
+attachments/7/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/7/offset = Vector3( -1, -0.117674, -9.0003e-06 )
+
+[node name="ScoreArea" type="Area" parent="."]
+input_capture_on_drag = true
+
+[node name="CollisionShape" type="CollisionShape" parent="ScoreArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.220168, 0.373947 )
+shape = SubResource( 7 )
+
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_ScoreArea_body_entered"]

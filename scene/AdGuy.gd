@@ -13,6 +13,7 @@ func loadAds() -> void:
 	admob.load_banner()
 	admob.load_interstitial()
 	admob.load_rewarded_video()
+	
 
 # buttons callbacks
 func _on_BtnReload_pressed() -> void:
@@ -72,6 +73,7 @@ func _on_AdMob_network_error():
 
 func _on_AdMob_rewarded(currency, amount):
 	debug_out.text = debug_out.text + "Rewarded watched, currency: " + str(currency) + " amount:"+ str(amount)+ "\n"
+	print("Rewarded watched, currency: " + str(currency) + " amount:"+ str(amount)+ "\n")
 
 func _on_AdMob_rewarded_video_closed():
 	debug_out.text = debug_out.text + "Rewarded video closed\n"
@@ -95,5 +97,10 @@ func _on_AdMob_rewarded_video_started():
 	debug_out.text = debug_out.text + "Rewarded video started\n"
 
 
+func roll_passive_ad():
+	admob.show_interstitial()
+
+
 func _on_LoadTimer_timeout():
 	admob.show_banner()
+	admob.show_rewarded_video()
