@@ -3,7 +3,7 @@ extends Spatial
 var current_level = 1
 
 
-var path1_prefab = load("res://scene/prefab/path/HoopPath1.tscn")
+var path1_prefab = load("res://scene/prefab/path/HoopPath8.tscn")
 
 var holding_ball = false
 var ball = null
@@ -14,6 +14,7 @@ var shopping = false
 
 var hoop = null
 var cage = null
+var room = null
 
 var pathspeed = 0.00
 var can_go = false
@@ -24,16 +25,16 @@ var balls_left = 8
 var balls_total = 8
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	swap_cage()
-	swap_hoop()
-	
-	
 	add_to_group("game")
 	GameBrain.playing_game = true
 	GameBrain.current_game_parent = self
 	GameBrain.hoop_focus = $HoopFocus
+	prepare()
 
-
+func prepare():
+	swap_cage()
+	swap_hoop()
+	swap_room()
 
 func _process(delta):
 	balls_total = GameBrain.game_data["balls total"]
@@ -70,17 +71,19 @@ func difficulty_raise():
 	
 	can_go = true
 
-func started_shopping():
-	shopping = true
 
-func done_shopping():
-	shopping = false
 
 func swap_cage():
 	if cage != null:
 		remove_child(cage)
 	cage = GameBrain.cage_prefab.instance()
 	add_child(cage)
+
+func swap_room():
+	if room != null:
+		remove_child(room)
+	room = GameBrain.room_prefab.instance()
+	add_child(room)
 
 func swap_hoop():
 	if hoop != null:
@@ -91,6 +94,7 @@ func swap_hoop():
 		pathf = null
 	hoop = GameBrain.hoop_prefab.instance()
 	add_child(hoop)
+	moving = false
 
 func add_pathf():
 	var ppathf = path1_prefab.instance()
@@ -112,13 +116,13 @@ func difficulty_lower():
 
 
 func regain_ball():
-	if (balls_left + 1) <= balls_total:
+	if (GameBrain.game_data["balls left"] + 1) <= GameBrain.game_data["balls total"]:
 		balls_left += 1
 		GameBrain.game_data["balls left"] += 1
 
 
 func hold_ball(pos3d):
-	if  !shopping and !holding_ball and balls_left > 0:
+	if  !holding_ball and balls_left > 0:
 		balls_left -= 1
 		GameBrain.game_data["balls left"] -= 1
 		ball = GameBrain.ball_prefab.instance()
@@ -135,14 +139,14 @@ func move_ball(pos2d):
 func shoot_ball(xdir, ydir):
 	holding_ball = false
 	ball.mode = RigidBody.MODE_RIGID
-	ball.apply_impulse(ball.global_transform.origin, Vector3(rand_range(-1,1) + xdir, rand_range(1,2) + (ydir * 0.2), rand_range(-4,-8) + -(ydir * 0.15)))
+	var randx = rand_range(-2,2) * GameBrain.game_data["aim skill"]
+	ball.apply_impulse(ball.global_transform.origin, Vector3( randx + xdir, rand_range(1,2) + (ydir * 0.2), rand_range(-4,-8) + -(ydir * 0.15)))
 
-func can_close():
-	get_tree().quit()
+
 
 func still_streak():
 	$StreakTimer.start(3)
-	var tickets_won = round(rand_range(1,3)) * GameBrain.win_streak
+	var tickets_won = round(rand_range(1,3)) * (GameBrain.win_streak * round(rand_range(1,3)))
 	$TicketParticles.amount = tickets_won
 	$TicketParticles.emitting = true
 	GameBrain.game_data["tickets"] += tickets_won

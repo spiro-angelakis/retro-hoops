@@ -3,7 +3,10 @@ extends Node2D
 onready var admob = $AdMob
 onready var debug_out = $DebugOut
 
+var can_do_passive = true
+
 func _ready():
+	add_to_group("adguy")
 	loadAds()
 # warning-ignore:return_value_discarded
 	get_tree().connect("screen_resized", self, "_on_resize")
@@ -14,6 +17,9 @@ func loadAds() -> void:
 	admob.load_interstitial()
 	admob.load_rewarded_video()
 	
+
+func go_reward():
+	admob.show_rewarded_video()
 
 # buttons callbacks
 func _on_BtnReload_pressed() -> void:
@@ -48,6 +54,7 @@ func _on_resize():
 	admob.banner_resize()
 
 func _on_AdMob_banner_failed_to_load(error_code):
+	admob.load_banner()
 	debug_out.text = debug_out.text + "Banner failed to load: Error code " + str(error_code) + "\n"
 
 func _on_AdMob_banner_loaded():
@@ -62,6 +69,7 @@ func _on_AdMob_interstitial_loaded():
 	debug_out.text = debug_out.text + "Interstitial loaded\n"
 
 func _on_AdMob_interstitial_closed():
+	admob.load_interstitial()
 	debug_out.text = debug_out.text + "Interstitial closed\n"
 	$"CanvasLayer/BtnInterstitial".disabled = true
 
@@ -72,6 +80,9 @@ func _on_AdMob_network_error():
 	debug_out.text = debug_out.text + "Network error\n"
 
 func _on_AdMob_rewarded(currency, amount):
+	GameBrain.game_data["tickets"] += 100
+	Data.save()
+	admob.load_rewarded_video()
 	debug_out.text = debug_out.text + "Rewarded watched, currency: " + str(currency) + " amount:"+ str(amount)+ "\n"
 	print("Rewarded watched, currency: " + str(currency) + " amount:"+ str(amount)+ "\n")
 
@@ -98,9 +109,16 @@ func _on_AdMob_rewarded_video_started():
 
 
 func roll_passive_ad():
-	admob.show_interstitial()
+	if can_do_passive:
+		admob.show_interstitial()
+		can_do_passive = false
+		$PassiveAdTimer.start(7)
 
 
 func _on_LoadTimer_timeout():
 	admob.show_banner()
-	admob.show_rewarded_video()
+	
+
+
+func _on_PassiveAdTimer_timeout():
+	can_do_passive = true

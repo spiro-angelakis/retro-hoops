@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scene/prefab/window/WindowFull.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/material/dirtywall1.tres" type="Material" id=2]
+[ext_resource path="res://scene/prefab/window/WindowFull.gd" type="Script" id=3]
+[ext_resource path="res://assets/texture/noise/carpet1.tres" type="Texture" id=4]
+
+[sub_resource type="OpenSimplexNoise" id=3]
+period = 0.1
+persistence = 0.0
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=4]
+width = 128
+height = 128
+seamless = true
+as_normalmap = true
+bump_strength = 7.4
+noise = SubResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.435294, 0.356863, 0.247059, 1 )
+albedo_texture = ExtResource( 4 )
+metallic = 0.12
+roughness = 0.71
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = SubResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+
+[node name="RoomSkin" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="wall" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.987052, 0, -0.160398, 0, 1, 0, 0.160398, 0, 0.987052, -8.60741, 7.20377, -1.12867 )
+width = 2.04198
+height = 30.0247
+depth = 25.7373
+material = ExtResource( 2 )
+
+[node name="wall2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.989013, 0, 0.147827, 0, 1, 0, -0.147827, 0, 0.989013, 8.84881, 7.20377, -1.12867 )
+width = 2.04198
+height = 28.5073
+depth = 25.7373
+material = ExtResource( 2 )
+
+[node name="wall3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( -0.00371753, 0, 0.999993, 0, 1, 0, -0.999993, 0, -0.00371753, 0.190221, 7.20377, -14.7328 )
+width = 2.04198
+height = 29.2438
+depth = 15.3456
+material = ExtResource( 2 )
+
+[node name="hole" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0352, -14.4707 )
+operation = 2
+width = 6.2402
+height = 6.35452
+depth = 6.51749
+material = ExtResource( 2 )
+
+[node name="floor" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.399374, -8.51794, -1.52005 )
+width = 22.7517
+depth = 27.9988
+material = SubResource( 5 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.2064, 0 )
+width = 23.2168
+depth = 25.7734
+material = SubResource( 6 )
+
+[node name="WindowFull" type="StaticBody" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0535, -14.3954 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 3 )

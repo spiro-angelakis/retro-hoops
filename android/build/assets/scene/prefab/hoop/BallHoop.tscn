@@ -10,7 +10,7 @@ size = Vector3( 2, 2, 0.2 )
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
-albedo_color = Color( 0.356863, 0.886275, 0.937255, 0.796078 )
+albedo_color = Color( 0.356863, 0.886275, 0.937255, 0.219608 )
 metallic = 0.48
 roughness = 0.56
 

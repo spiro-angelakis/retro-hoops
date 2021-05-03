@@ -26,6 +26,7 @@ var ball7_prefab = preload("res://scene/prefab/balls/Fish.tscn").duplicate()
 var ball8_prefab = preload("res://scene/prefab/balls/Knife.tscn").duplicate()
 
 var ball_prefab = null
+var ball_bounce_mod = 0.5
 var ball_index = 1
 # 1 = original
 # 2 = stoneball
@@ -53,6 +54,20 @@ var cage_prefab = null
 var cage_index = 1
 
 
+# ROOMS
+var room1_prefab = preload("res://scene/prefab/room/RoomSkin.tscn").duplicate()
+var room2_prefab = preload("res://scene/prefab/room/RoomSkin2.tscn").duplicate()
+var room3_prefab = preload("res://scene/prefab/room/RoomSkin3.tscn").duplicate()
+var room4_prefab = preload("res://scene/prefab/room/RoomSkin4.tscn").duplicate()
+var room5_prefab = preload("res://scene/prefab/room/RoomSkin5.tscn").duplicate()
+var room6_prefab = preload("res://scene/prefab/room/RoomSkin6.tscn").duplicate()
+
+var room_prefab = null
+var room_index = 1
+
+
+
+
 var current_game_parent = null
 
 var game_data = {
@@ -61,6 +76,12 @@ var game_data = {
 	"balls left" : 8,
 	"balls total" : 8,
 	"tickets" : 0,
+	"aim skill" : 1.0,
+	"aim skill level" : 0,
+	"unlocked balls" : 1,
+	"unlocked hoops" : 1,
+	"unlocked cages" : 1,
+	"unlocked rooms" : 1,
 	"all-time points" : 0
 }
 
@@ -79,11 +100,14 @@ var playing_game = false
 var hoop_focus = null
 var hoop_speed = 0.1
 
+var downlevels_without_ad = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ball_prefab = ball1_prefab
 	hoop_prefab = hoop1_prefab
 	cage_prefab = cage1_prefab
+	room_prefab = room1_prefab
 
 
 func _process(delta):
@@ -91,50 +115,60 @@ func _process(delta):
 		if current_streak >= 3:
 			current_streak = 0
 			game_data.level += 1
+			if game_data.level > 1:
+				var chance_to_propose = round(rand_range(0,1))
+				if chance_to_propose == 1:
+					get_tree().call_group("gameui", "propose_reward")
 		
 		if game_data.level > 1 and shots_missed >= 5:
 			game_data.level -= 1
 			shots_missed = 0
+			downlevels_without_ad += 1
+			if downlevels_without_ad > 3:
+				downlevels_without_ad = 0
+				get_tree().call_group("adguy", "roll_passive_ad")
 
 
 func change_ball(upbool):
-	if upbool:
+	if upbool and (ball_index + 1) <= game_data["unlocked balls"]:
 		ball_index += 1
-		if ball_index == 9:
-			ball_index = 1
-	else:
+	
+	if !upbool and (ball_index - 1) > 0:
 		ball_index -= 1
-		if ball_index == 0:
-			ball_index = 9
 	
 	if ball_index == 1:
+		ball_bounce_mod = 0.5
 		ball_prefab = ball1_prefab
 	elif ball_index == 2:
+		ball_bounce_mod = 0.1
 		ball_prefab = ball2_prefab
 	elif ball_index == 3:
+		ball_bounce_mod = 0
 		ball_prefab = ball3_prefab
 	elif ball_index == 4:
+		ball_bounce_mod = 0.4
 		ball_prefab = ball4_prefab
 	elif ball_index == 5:
+		ball_bounce_mod = 1
 		ball_prefab = ball5_prefab
 	elif ball_index == 6:
+		ball_bounce_mod = 0.2
 		ball_prefab = ball6_prefab
 	elif ball_index == 7:
+		ball_bounce_mod = 0.8
 		ball_prefab = ball7_prefab
 	elif ball_index == 8:
+		ball_bounce_mod = 0.3
 		ball_prefab = ball8_prefab
 
 
 
 func change_cage(upbool):
-	if upbool:
+	if upbool and (cage_index + 1) <= game_data["unlocked cages"]:
 		cage_index += 1
-		if cage_index == 10:
-			cage_index = 1
-	else:
+	
+	if !upbool and (cage_index - 1) > 0:
 		cage_index -= 1
-		if cage_index == 0:
-			cage_index = 10
 	
 	if cage_index == 1:
 		cage_prefab = cage1_prefab
@@ -153,19 +187,16 @@ func change_cage(upbool):
 	elif cage_index == 8:
 		cage_prefab = cage8_prefab
 	elif cage_index == 9:
-		cage_prefab = cage8_prefab
+		cage_prefab = cage9_prefab
 	
 	get_tree().call_group("game", "swap_cage")
 
 func change_hoop(upbool):
-	if upbool:
+	if upbool and (hoop_index + 1) <= game_data["unlocked hoops"]:
 		hoop_index += 1
-		if hoop_index == 6:
-			hoop_index = 1
-	else:
+	
+	if !upbool and (hoop_index - 1) > 0:
 		hoop_index -= 1
-		if hoop_index == 0:
-			hoop_index = 5
 	
 	if hoop_index == 1:
 		hoop_prefab = hoop1_prefab
@@ -180,3 +211,24 @@ func change_hoop(upbool):
 	
 	get_tree().call_group("game", "swap_hoop")
 
+func change_room(upbool):
+	if upbool and (room_index + 1) <= game_data["unlocked rooms"]:
+		room_index += 1
+	
+	if !upbool and (room_index - 1) > 0:
+		room_index -= 1
+	
+	if room_index == 1:
+		room_prefab = room1_prefab
+	elif room_index == 2:
+		room_prefab = room2_prefab
+	elif room_index == 3:
+		room_prefab = room3_prefab
+	elif room_index == 4:
+		room_prefab = room4_prefab
+	elif room_index == 5:
+		room_prefab = room5_prefab
+	elif room_index == 6:
+		room_prefab = room6_prefab
+	
+	get_tree().call_group("game", "swap_room")

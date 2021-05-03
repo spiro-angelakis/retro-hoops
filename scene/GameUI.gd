@@ -16,22 +16,47 @@ var points = 0
 var level = 1
 var balls = 8
 var tickets = 0
+var tickets_since_ad = 0
+
+var shopping = false
+var proposing_ad = false
+
+onready var ad_proposal = $AdProposal
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#$AdTimer.start(5)
+	ad_proposal.visible = false
+	add_to_group("gameui")
 	get_tree().call_group("sandman", "time_began")
 	var ss = OS.get_screen_size(-1)
 	$ViewportContainer.rect_min_size = ss
 	$ViewportContainer.rect_size = ss
 	$ViewportContainer/Viewport.size = ss
 	$TouchScreenButton.shape.extents = ss
+	$NoticeStart.rect_min_size = ss
+	$NoticeStart.rect_size = ss
+	$Shop.rect_min_size = ss
+	$Shop.rect_size = ss
+	$AdProposal.rect_min_size = ss
+	$AdProposal.rect_size = ss
+	$QuitQuery.rect_min_size = ss
+	$QuitQuery.rect_size = ss
+	
+
+func propose_reward():
+	ad_proposal.visible = true
+	proposing_ad = true
 
 func _physics_process(delta):
 	check_tickets()
 	
 	update_hud()
 	
+	if proposing_ad and holding_ball:
+		holding_ball = false
+		throwline.set_point_position(0, Vector2(0,0))
+		throwline.set_point_position(1, Vector2(0,0))
 	
 	if holding_ball:
 		throwline.set_point_position(1, get_global_mouse_position())
@@ -40,20 +65,22 @@ func _physics_process(delta):
 		#get_tree().call_group("game", "move_ball", get_global_mouse_position())
 
 func check_tickets():
-	if tickets >= 50:
+	if tickets_since_ad >= 50:
 		# we unlocked a new item ! WIP
-		tickets = 0
-		GameBrain.game_data["tickets"] = 0
+		tickets_since_ad = 0
 		$AdGuy.roll_passive_ad()
 
 func _notification(event):
 	if event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
 		Data.save()
+		$QuitQuery.visible = true
 
 func update_hud():
 	points = GameBrain.game_data["points"]
 	level = GameBrain.game_data["level"]
 	balls = GameBrain.game_data["balls left"]
+	if tickets != GameBrain.game_data["tickets"]:
+		tickets_since_ad += GameBrain.game_data["tickets"] - tickets
 	tickets = GameBrain.game_data["tickets"]
 	
 	scoretext.bbcode_text = str("[center]Score: " + str(points) + "[/center]")
@@ -62,12 +89,13 @@ func update_hud():
 	ballstext.bbcode_text = str("[center]Balls: " + str(balls) + "[/center]")
 	tickettext.bbcode_text = str("[center]Tickets: " + str(tickets) + "[/center]")
 
-
+func done_shopping():
+	shopping = false
 
 
 func _on_TouchScreenButton_pressed():
 	touching = true
-	if !holding_ball and GameBrain.game_data["balls left"] > 0:
+	if !shopping and !proposing_ad and !holding_ball and GameBrain.game_data["balls left"] > 0:
 		holding_ball = true
 		throwline.set_point_position(0, get_global_mouse_position())
 		var pos3d = Vector3(clamp(0 - get_global_mouse_position().x, -1.5, 1.5), clamp(0 - get_global_mouse_position().y, -1.5, 1.5), 0)
@@ -78,9 +106,11 @@ func _on_TouchScreenButton_released():
 	touching = false
 	throwline.set_point_position(0, Vector2(0,0))
 	throwline.set_point_position(1, Vector2(0,0))
-	if holding_ball:
-		holding_ball = false
-		get_tree().call_group("game", "shoot_ball", float(currentForce.x * 0.2), -float(currentForce.y * 0.2))
+	if !shopping and !proposing_ad:
+		
+		if holding_ball:
+			holding_ball = false
+			get_tree().call_group("game", "shoot_ball", float(currentForce.x * 0.2), -float(currentForce.y * 0.2))
 
 
 func _on_AdTimer_timeout():
@@ -90,5 +120,38 @@ func _on_AdTimer_timeout():
 
 
 func _on_ShopButton_pressed():
-	$Shop.visible = true
-	get_tree().call_group("game", "started_shopping")
+	if !proposing_ad:
+		$Shop.visible = true
+		shopping = true
+
+
+
+func _on_NoticeStartTimer_timeout():
+	$NoticeStart.queue_free()
+
+
+func _on_AdAcceptButton_pressed():
+	if proposing_ad:
+		$AdGuy.go_reward()
+		$AdProposal.visible = false
+		proposing_ad = false
+
+
+func _on_AdDeclineButton_pressed():
+	if proposing_ad:
+		$AdProposal.visible = false
+		proposing_ad = false
+		var chance_to_ad = round(rand_range(0,2))
+		if chance_to_ad == 2:
+			$AdGuy.roll_passive_ad()
+	
+
+
+func _on_KeepPlayingButton_pressed():
+	if $QuitQuery.visible:
+		$QuitQuery.visible = false
+
+
+func _on_QuitGameButton_pressed():
+	if $QuitQuery.visible:
+		get_tree().quit()

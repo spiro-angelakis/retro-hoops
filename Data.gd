@@ -2,7 +2,6 @@ extends Node
 
 const FILE_NAME = "user://retrohoops-data.json"
 
-var player = ["1", "0"]
 
 func save():
 	var file = File.new()
@@ -12,7 +11,6 @@ func save():
 	data["points"] = 0
 	file.store_string(to_json(data))
 	file.close()
-	get_tree().call_group("game", "can_close")
 
 func load():
 	var file = File.new()

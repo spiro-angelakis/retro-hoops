@@ -13,4 +13,5 @@ func smash_window():
 	var broken = broken_prefab.instance()
 	GameBrain.current_game_parent.add_child(broken)
 	broken.global_transform.origin = self.global_transform.origin
+	broken.rotation_degrees = rotation_degrees
 	queue_free()

@@ -56,7 +56,7 @@ func update_progress():
 	var progress = float(loader.get_stage()) / loader.get_stage_count()
 	#loading_screen.loadprogbar.max_value = loader.get_stage_count()
 	#loading_screen.loadprogbar.value = float(loader.get_stage())
-	wait_frames += 1
+	wait_frames += 3
 
 func set_new_scene(resource):
 	var loaded_scene = resource.instance()

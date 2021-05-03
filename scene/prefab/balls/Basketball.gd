@@ -8,6 +8,7 @@ var good = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_bounce(GameBrain.ball_bounce_mod)
 	add_to_group("ball")
 	$Particles.amount = round(rand_range(1, 5))
 	$OmniLight.light_color = Color(rand_range(0,1), rand_range(0,1), rand_range(0,1))

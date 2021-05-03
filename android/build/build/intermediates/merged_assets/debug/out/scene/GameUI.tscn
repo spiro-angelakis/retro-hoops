@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scene/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://admob-lib/admob.gd" type="Script" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://scene/AdGuy.gd" type="Script" id=7]
 [ext_resource path="res://assets/font/Hoops!.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scene/Shop.gd" type="Script" id=9]
+[ext_resource path="res://assets/texture/notice.png" type="Texture" id=10]
+[ext_resource path="res://assets/texture/title3d.png" type="Texture" id=11]
+[ext_resource path="res://assets/texture/proposal.png" type="Texture" id=12]
+[ext_resource path="res://assets/texture/quitquery.png" type="Texture" id=13]
 
 [sub_resource type="Shader" id=1]
 code = "/*
@@ -38,7 +42,7 @@ shader = SubResource( 1 )
 shader_param/amount = 300
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 300, 512 )
+extents = Vector2( 300, 340 )
 
 [sub_resource type="DynamicFont" id=4]
 outline_size = 2
@@ -58,6 +62,30 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 4 )
+
+[sub_resource type="CanvasItemMaterial" id=9]
+blend_mode = 4
+
+[sub_resource type="CanvasItemMaterial" id=10]
+blend_mode = 3
+
+[sub_resource type="DynamicFont" id=11]
+size = 28
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 28
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 18
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
 
 [node name="GameUI" type="Node2D"]
 script = ExtResource( 3 )
@@ -82,6 +110,7 @@ render_target_update_mode = 3
 points = PoolVector2Array( 0, 0, 0, 0 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 0, 284.678 )
 shape = SubResource( 3 )
 
 [node name="HUD" type="CenterContainer" parent="."]
@@ -198,16 +227,14 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="Shop"]
 modulate = Color( 0.0941176, 0, 1, 0.678431 )
 margin_left = 6.0
-margin_top = 16.0
 margin_right = 606.0
-margin_bottom = 916.0
+margin_bottom = 900.0
 rect_min_size = Vector2( 600, 900 )
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Shop"]
-margin_top = 16.0
 margin_right = 612.0
-margin_bottom = 916.0
+margin_bottom = 900.0
 rect_min_size = Vector2( 600, 900 )
 mouse_filter = 2
 
@@ -832,8 +859,8 @@ rect_min_size = Vector2( 200, 40 )
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[center]Buy for 100000 tickets[/center]"
-text = "Buy for 100000 tickets"
+bbcode_text = "[center]Buy for 50000 tickets[/center]"
+text = "Buy for 50000 tickets"
 
 [node name="HSeparator6" type="HSeparator" parent="Shop/VBoxContainer"]
 margin_top = 610.0
@@ -1003,11 +1030,161 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
+[node name="PassiveAdTimer" type="Timer" parent="AdGuy"]
+wait_time = 5.0
+one_shot = true
+
+[node name="NoticeStart" type="CenterContainer" parent="."]
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 600, 1024 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelRect" type="TextureRect" parent="NoticeStart"]
+material = SubResource( 9 )
+margin_right = 600.0
+margin_bottom = 1024.0
+mouse_filter = 2
+texture = ExtResource( 10 )
+
+[node name="TitleRect" type="TextureRect" parent="NoticeStart"]
+material = SubResource( 10 )
+margin_top = 343.0
+margin_right = 600.0
+margin_bottom = 680.0
+mouse_filter = 2
+texture = ExtResource( 11 )
+
+[node name="NoticeStartTimer" type="Timer" parent="NoticeStart"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="AdProposal" type="CenterContainer" parent="."]
+visible = false
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 600, 1024 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelRect" type="TextureRect" parent="AdProposal"]
+margin_top = 212.0
+margin_right = 600.0
+margin_bottom = 812.0
+mouse_filter = 2
+texture = ExtResource( 12 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdProposal"]
+margin_left = 100.0
+margin_top = 362.0
+margin_right = 500.0
+margin_bottom = 662.0
+rect_min_size = Vector2( 400, 300 )
+
+[node name="QuestionText" type="RichTextLabel" parent="AdProposal/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 400, 100 )
+custom_fonts/normal_font = SubResource( 11 )
+bbcode_enabled = true
+bbcode_text = "[center] Want to watch a quick ad and get a hundred tickets?[/center]"
+text = " Want to watch a quick ad and get a hundred tickets?"
+
+[node name="AdAcceptButton" type="Button" parent="AdProposal/VBoxContainer"]
+margin_top = 104.0
+margin_right = 400.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 400, 80 )
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
+custom_colors/font_color = Color( 0.0470588, 1, 0, 1 )
+text = "YES, TICKETS!"
+
+[node name="AdDeclineButton" type="Button" parent="AdProposal/VBoxContainer"]
+margin_top = 188.0
+margin_right = 400.0
+margin_bottom = 268.0
+rect_min_size = Vector2( 400, 80 )
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
+custom_colors/font_color = Color( 1, 0.211765, 0, 1 )
+text = "I don't want free tickets"
+
+[node name="QuitQuery" type="CenterContainer" parent="."]
+visible = false
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 600, 1024 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelRect" type="TextureRect" parent="QuitQuery"]
+margin_top = 212.0
+margin_right = 600.0
+margin_bottom = 812.0
+mouse_filter = 2
+texture = ExtResource( 13 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuitQuery"]
+margin_left = 100.0
+margin_top = 412.0
+margin_right = 500.0
+margin_bottom = 612.0
+rect_min_size = Vector2( 400, 200 )
+
+[node name="KeepPlayingButton" type="Button" parent="QuitQuery/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 400, 80 )
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
+custom_colors/font_color = Color( 0.0470588, 1, 0, 1 )
+text = "Back to Game"
+
+[node name="QuitGameButton" type="Button" parent="QuitQuery/VBoxContainer"]
+margin_top = 84.0
+margin_right = 400.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 400, 80 )
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
+custom_colors/font_color = Color( 1, 0.211765, 0, 1 )
+text = "quit game"
+
 [connection signal="pressed" from="TouchScreenButton" to="." method="_on_TouchScreenButton_pressed"]
 [connection signal="released" from="TouchScreenButton" to="." method="_on_TouchScreenButton_released"]
 [connection signal="pressed" from="HUD/HBoxContainer/CenterContainer3/VBoxContainer/ShopButton" to="." method="_on_ShopButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/BallAmount/ButtonContainer/VBoxContainer/BuyContainer/BuyBallsButton" to="Shop" method="_on_BuyBallsButton_pressed"]
 [connection signal="pressed" from="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/ButtonsHbox/BallDownButton" to="Shop" method="_on_BallDownButton_pressed"]
 [connection signal="pressed" from="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/ButtonsHbox/BallUpButton" to="Shop" method="_on_BallUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/BuyContainer/BuyBallSkinButton" to="Shop" method="_on_BuyBallSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/ButtonsHbox/HoopDownButton" to="Shop" method="_on_HoopDownButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/ButtonsHbox/HoopUpButton" to="Shop" method="_on_HoopUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/BuyContainer/BuyHoopSkinButton" to="Shop" method="_on_BuyHoopSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/ButtonsHbox/CageDownButton" to="Shop" method="_on_CageDownButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/ButtonsHbox/CageUpButton" to="Shop" method="_on_CageUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/BuyContainer/BuyCageSkinButton" to="Shop" method="_on_BuyCageSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/ButtonsHbox/RoomDownButton" to="Shop" method="_on_RoomDownButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/ButtonsHbox/RoomUpButton" to="Shop" method="_on_RoomUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/BuyContainer/BuyRoomSkinButton" to="Shop" method="_on_BuyRoomSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/AimSkill/ButtonContainer/VBoxContainer/BuyContainer/BuyAimLevelButton" to="Shop" method="_on_BuyAimLevelButton_pressed"]
 [connection signal="pressed" from="Shop/VBoxContainer/ExitShopContainer/ExitButton" to="Shop" method="_on_ExitButton_pressed"]
 [connection signal="timeout" from="Sandman/Time" to="Sandman" method="_on_Time_timeout"]
+[connection signal="banner_failed_to_load" from="AdGuy/AdMob" to="AdGuy" method="_on_AdMob_banner_failed_to_load"]
+[connection signal="interstitial_closed" from="AdGuy/AdMob" to="AdGuy" method="_on_AdMob_interstitial_closed"]
+[connection signal="rewarded" from="AdGuy/AdMob" to="AdGuy" method="_on_AdMob_rewarded"]
 [connection signal="timeout" from="AdGuy/LoadTimer" to="AdGuy" method="_on_LoadTimer_timeout"]
+[connection signal="timeout" from="AdGuy/PassiveAdTimer" to="AdGuy" method="_on_PassiveAdTimer_timeout"]
+[connection signal="timeout" from="NoticeStart/NoticeStartTimer" to="." method="_on_NoticeStartTimer_timeout"]
+[connection signal="pressed" from="AdProposal/VBoxContainer/AdAcceptButton" to="." method="_on_AdAcceptButton_pressed"]
+[connection signal="pressed" from="AdProposal/VBoxContainer/AdDeclineButton" to="." method="_on_AdDeclineButton_pressed"]
+[connection signal="pressed" from="QuitQuery/VBoxContainer/KeepPlayingButton" to="." method="_on_KeepPlayingButton_pressed"]
+[connection signal="pressed" from="QuitQuery/VBoxContainer/QuitGameButton" to="." method="_on_QuitGameButton_pressed"]

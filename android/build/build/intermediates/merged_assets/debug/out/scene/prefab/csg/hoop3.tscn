@@ -1,0 +1,89 @@
+[gd_scene format=2]
+
+[node name="hoop3" type="CSGCombiner"]
+
+[node name="CSGCylinder" type="CSGCylinder" parent="."]
+sides = 16
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="."]
+operation = 2
+radius = 0.892529
+height = 1.09456
+sides = 16
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( -1.49012e-08, 0, -1, 0, 1, 0, 1, 0, -1.49012e-08, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox7" type="CSGBox" parent="."]
+transform = Transform( -0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox8" type="CSGBox" parent="."]
+transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox9" type="CSGBox" parent="."]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox10" type="CSGBox" parent="."]
+transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
+
+[node name="CSGBox11" type="CSGBox" parent="."]
+transform = Transform( -0.965925, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965925, 0, -0.302363, 0 )
+operation = 2
+width = 2.17389
+height = 0.962152
+depth = 0.100683
