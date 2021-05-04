@@ -4,12 +4,14 @@
 [ext_resource path="res://assets/material/painted_white.tres" type="Material" id=2]
 [ext_resource path="res://assets/material/carpet_bright_blue.tres" type="Material" id=3]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.109804, 0.109804, 0.109804, 1 )
 
 [node name="RoomSkin2" type="Spatial"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="CSGCombiner" type="CSGCombiner" parent="." groups=[
+"hard",
+]]
 use_collision = true
 
 [node name="wall" type="CSGBox" parent="CSGCombiner"]
@@ -59,7 +61,7 @@ material = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.2064, 0 )
 width = 23.2168
 depth = 25.7734
-material = SubResource( 4 )
+material = SubResource( 1 )
 
 [node name="WindowFull" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.8293, -14.3954 )

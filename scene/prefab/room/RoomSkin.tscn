@@ -1,38 +1,39 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scene/prefab/window/WindowFull.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/material/dirtywall1.tres" type="Material" id=2]
-[ext_resource path="res://scene/prefab/window/WindowFull.gd" type="Script" id=3]
 [ext_resource path="res://assets/texture/noise/carpet1.tres" type="Texture" id=4]
 
-[sub_resource type="OpenSimplexNoise" id=3]
+[sub_resource type="OpenSimplexNoise" id=1]
 period = 0.1
 persistence = 0.0
 lacunarity = 4.0
 
-[sub_resource type="NoiseTexture" id=4]
+[sub_resource type="NoiseTexture" id=2]
 width = 128
 height = 128
 seamless = true
 as_normalmap = true
 bump_strength = 7.4
-noise = SubResource( 3 )
+noise = SubResource( 1 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.435294, 0.356863, 0.247059, 1 )
 albedo_texture = ExtResource( 4 )
 metallic = 0.12
 roughness = 0.71
 normal_enabled = true
 normal_scale = 1.0
-normal_texture = SubResource( 4 )
+normal_texture = SubResource( 2 )
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.109804, 0.109804, 0.109804, 1 )
 
 [node name="RoomSkin" type="Spatial"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="CSGCombiner" type="CSGCombiner" parent="." groups=[
+"hard",
+]]
 use_collision = true
 
 [node name="wall" type="CSGBox" parent="CSGCombiner"]
@@ -68,16 +69,13 @@ material = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.399374, -8.51794, -1.52005 )
 width = 22.7517
 depth = 27.9988
-material = SubResource( 5 )
+material = SubResource( 3 )
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.2064, 0 )
 width = 23.2168
 depth = 25.7734
-material = SubResource( 6 )
+material = SubResource( 4 )
 
-[node name="WindowFull" type="StaticBody" parent="." instance=ExtResource( 1 )]
+[node name="WindowFull" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0535, -14.3954 )
-collision_layer = 3
-collision_mask = 3
-script = ExtResource( 3 )

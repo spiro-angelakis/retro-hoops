@@ -12,6 +12,8 @@ onready var timetext = $HUD/HBoxContainer/CenterContainer2/VBoxContainer/TimeTex
 onready var ballstext = $HUD/HBoxContainer/CenterContainer/VBoxContainer/BallsText
 onready var tickettext = $HUD/HBoxContainer/CenterContainer3/VBoxContainer/TicketText
 
+onready var adbribetext = $AdProposal/VBoxContainer/AmountText
+
 var points = 0
 var level = 1
 var balls = 8
@@ -45,6 +47,9 @@ func _ready():
 	
 
 func propose_reward():
+	var bribe = round(rand_range(50,100)) * GameBrain.game_data["level"]
+	GameBrain.current_bribe_amount = bribe
+	adbribetext.bbcode_text = str("[center]" + str(bribe) + " tickets[/center]")
 	ad_proposal.visible = true
 	proposing_ad = true
 
@@ -121,6 +126,7 @@ func _on_AdTimer_timeout():
 
 func _on_ShopButton_pressed():
 	if !proposing_ad:
+		$ClickSound.play()
 		$Shop.visible = true
 		shopping = true
 
@@ -132,6 +138,7 @@ func _on_NoticeStartTimer_timeout():
 
 func _on_AdAcceptButton_pressed():
 	if proposing_ad:
+		$ClickSound.play()
 		$AdGuy.go_reward()
 		$AdProposal.visible = false
 		proposing_ad = false
@@ -139,6 +146,7 @@ func _on_AdAcceptButton_pressed():
 
 func _on_AdDeclineButton_pressed():
 	if proposing_ad:
+		$ClickSound.play()
 		$AdProposal.visible = false
 		proposing_ad = false
 		var chance_to_ad = round(rand_range(0,2))
@@ -149,9 +157,11 @@ func _on_AdDeclineButton_pressed():
 
 func _on_KeepPlayingButton_pressed():
 	if $QuitQuery.visible:
+		$ClickSound.play()
 		$QuitQuery.visible = false
 
 
 func _on_QuitGameButton_pressed():
 	if $QuitQuery.visible:
+		$ClickSound.play()
 		get_tree().quit()

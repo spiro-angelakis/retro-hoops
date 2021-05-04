@@ -5,7 +5,9 @@
 
 [node name="RoomSkin5" type="Spatial"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="CSGCombiner" type="CSGCombiner" parent="." groups=[
+"hard",
+]]
 use_collision = true
 
 [node name="wall" type="CSGBox" parent="CSGCombiner"]

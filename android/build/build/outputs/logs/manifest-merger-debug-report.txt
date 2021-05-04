@@ -46,9 +46,9 @@ MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Angel\.gradle
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\ac361face763b38075ac877c18b42d1f\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\79ede6663a81cd857f05187f391cb70e\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-ads-base:19.3.0] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\1898760dbfdbcf8d33eeb2f91c386be8\jetified-play-services-ads-base-19.3.0\AndroidManifest.xml:2:1-9:12
-INJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:2:1-29:12
 	package
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:4:5-29
 		INJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml
@@ -131,12 +131,12 @@ MERGED from [com.google.android.gms:play-services-ads-base:19.3.0] C:\Users\Ange
 	android:allowBackup
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:31:68-95
 	tools:replace
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:22:9-61
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:21:9-61
 meta-data#xr_mode_metadata_name
 ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:42:9-44:54
 REJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:42:9-44:54
 	tools:node
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:25:20-39
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:24:20-39
 	android:value
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:44:13-51
 	android:name
@@ -167,14 +167,14 @@ MERGED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\Andr
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:49:13-55
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:49:13-55
 	tools:replace
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:26:58-99
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:25:58-99
 	android:name
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:47:13-37
 meta-data#com.oculus.vr.focusaware
 ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:57:13-88
 REJECTED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:57:13-88
 	tools:node
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:27:24-43
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:26:24-43
 	android:value
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:57:64-85
 	android:name
@@ -297,12 +297,8 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.1.0] C:
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.1.0] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\e405518e8fae93608c51520df1133990\jetified-play-services-measurement-sdk-api-17.1.0\AndroidManifest.xml:24:5-79
 	android:name
 		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:11:22-76
-uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:12:5-76
-	android:name
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:12:22-73
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:13:5-67
+ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:12:5-67
 MERGED from [GodotAdMob.5.0.0.release.aar] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\f02de1a9a18959f6abfa62e64a8710fc\jetified-GodotAdMob.5.0.0.release\AndroidManifest.xml:11:5-67
 MERGED from [GodotAdMob.5.0.0.release.aar] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\f02de1a9a18959f6abfa62e64a8710fc\jetified-GodotAdMob.5.0.0.release\AndroidManifest.xml:11:5-67
 MERGED from [com.google.android.gms:play-services-ads-lite:19.3.0] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\fa6cfc23dc860f4dc0df470ff0f1ef13\jetified-play-services-ads-lite-19.3.0\AndroidManifest.xml:23:5-67
@@ -310,20 +306,20 @@ MERGED from [com.google.android.gms:play-services-ads-lite:19.3.0] C:\Users\Ange
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.1.0] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\e405518e8fae93608c51520df1133990\jetified-play-services-measurement-sdk-api-17.1.0\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.1.0] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\e405518e8fae93608c51520df1133990\jetified-play-services-measurement-sdk-api-17.1.0\AndroidManifest.xml:23:5-67
 	android:name
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:13:22-64
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:12:22-64
 instrumentation
-ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:14:5-19:58
+ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:13:5-18:58
 REJECTED from [godot-lib.debug.aar] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\1bb5bb552ba3c7d30912cd84abcb171c\jetified-godot-lib.debug\AndroidManifest.xml:11:5-15:57
 	tools:node
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:15:9-29
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:14:9-29
 	android:label
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:18:9-58
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:17:9-58
 	android:icon
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:17:9-36
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:16:9-36
 	android:targetPackage
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:19:9-55
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:18:9-55
 	android:name
-		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:16:9-45
+		ADDED from C:\Users\Angel\HDD Documents\git_work\retro-hoops\android\build\src\debug\AndroidManifest.xml:15:9-45
 meta-data#org.godotengine.library.version
 ADDED from [godot-lib.debug.aar] C:\Users\Angel\.gradle\caches\transforms-2\files-2.1\1bb5bb552ba3c7d30912cd84abcb171c\jetified-godot-lib.debug\AndroidManifest.xml:20:9-22:44
 	android:value

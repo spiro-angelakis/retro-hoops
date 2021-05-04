@@ -5,6 +5,9 @@ onready var anim = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for i in get_child_count() - 1:
+		get_node("CSGCombiner").add_to_group("hard")
+	add_to_group("hard")
 	add_to_group("cage")
 
 func _process(delta):

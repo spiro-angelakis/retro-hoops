@@ -139,14 +139,16 @@ func move_ball(pos2d):
 func shoot_ball(xdir, ydir):
 	holding_ball = false
 	ball.mode = RigidBody.MODE_RIGID
-	var randx = rand_range(-2,2) * GameBrain.game_data["aim skill"]
+	var randx = rand_range(-1.2,1.2) * GameBrain.game_data["aim skill"]
 	ball.apply_impulse(ball.global_transform.origin, Vector3( randx + xdir, rand_range(1,2) + (ydir * 0.2), rand_range(-4,-8) + -(ydir * 0.15)))
 
 
 
 func still_streak():
+	$HornSound.stop()
+	$HornSound.play()
 	$StreakTimer.start(3)
-	var tickets_won = round(rand_range(1,3)) * (GameBrain.win_streak * round(rand_range(1,3)))
+	var tickets_won = round(rand_range(1,2)) * (GameBrain.win_streak * round(rand_range(1,2)))
 	$TicketParticles.amount = tickets_won
 	$TicketParticles.emitting = true
 	GameBrain.game_data["tickets"] += tickets_won

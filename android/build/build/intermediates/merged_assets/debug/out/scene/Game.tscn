@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/texture/particle/ticket.png" type="Texture" id=1]
 [ext_resource path="res://scene/Game.gd" type="Script" id=2]
+[ext_resource path="res://assets/sound/fx/blowhorn.mp3" type="AudioStream" id=3]
+
+[sub_resource type="SphereShape" id=6]
+radius = 108.52
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.909804, 0.811765, 0.47451, 1 )
@@ -52,11 +56,27 @@ uv1_scale = Vector3( 3, 2, 1 )
 material = SubResource( 4 )
 size = Vector3( 1, 0.05, 0.5 )
 
+[sub_resource type="AudioStreamRandomPitch" id=7]
+audio_stream = ExtResource( 3 )
+
 [node name="Game" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80639, 13.1022 )
+current = true
+
+[node name="Listener" type="Listener" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695 )
+current = true
+
+[node name="HearArea" type="Area" parent="Camera"]
+collision_layer = 16
+collision_mask = 16
+audio_bus_name = "Balls"
+
+[node name="CollisionShape" type="CollisionShape" parent="Camera/HearArea"]
+shape = SubResource( 6 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
@@ -85,5 +105,10 @@ explosiveness = 0.43
 randomness = 0.72
 process_material = SubResource( 3 )
 draw_pass_1 = SubResource( 5 )
+
+[node name="HornSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 7 )
+pitch_scale = 0.9
+bus = "Horn"
 
 [connection signal="timeout" from="StreakTimer" to="." method="_on_StreakTimer_timeout"]

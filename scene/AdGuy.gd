@@ -74,27 +74,31 @@ func _on_AdMob_interstitial_closed():
 	$"CanvasLayer/BtnInterstitial".disabled = true
 
 func _on_AdMob_interstitial_failed_to_load(error_code):
+	admob.load_interstitial()
 	debug_out.text = debug_out.text + "Interstitial failed to load: Error code " + str(error_code) + "\n"
 
 func _on_AdMob_network_error():
 	debug_out.text = debug_out.text + "Network error\n"
 
 func _on_AdMob_rewarded(currency, amount):
-	GameBrain.game_data["tickets"] += 100
+	GameBrain.game_data["tickets"] += GameBrain.current_bribe_amount
 	Data.save()
 	admob.load_rewarded_video()
 	debug_out.text = debug_out.text + "Rewarded watched, currency: " + str(currency) + " amount:"+ str(amount)+ "\n"
 	print("Rewarded watched, currency: " + str(currency) + " amount:"+ str(amount)+ "\n")
 
 func _on_AdMob_rewarded_video_closed():
+	admob.load_rewarded_video()
 	debug_out.text = debug_out.text + "Rewarded video closed\n"
 	$"CanvasLayer/BtnRewardedVideo".disabled = true
 	admob.load_rewarded_video()
 
 func _on_AdMob_rewarded_video_failed_to_load(error_code):
+	admob.load_rewarded_video()
 	debug_out.text = debug_out.text + "Rewarded video failed to load: Error code " + str(error_code) + "\n"
 
 func _on_AdMob_rewarded_video_left_application():
+	admob.load_rewarded_video()
 	debug_out.text = debug_out.text + "Rewarded video left application\n"
 
 func _on_AdMob_rewarded_video_loaded():

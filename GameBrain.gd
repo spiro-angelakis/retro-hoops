@@ -69,6 +69,7 @@ var room_index = 1
 
 
 var current_game_parent = null
+var current_bribe_amount = 100
 
 var game_data = {
 	"points" : 0,
@@ -124,9 +125,11 @@ func _process(delta):
 			game_data.level -= 1
 			shots_missed = 0
 			downlevels_without_ad += 1
-			if downlevels_without_ad > 3:
-				downlevels_without_ad = 0
-				get_tree().call_group("adguy", "roll_passive_ad")
+			if downlevels_without_ad > 2:
+				var do_ad = round(rand_range(0,2))
+				if do_ad == 2:
+					downlevels_without_ad = 0
+					get_tree().call_group("adguy", "roll_passive_ad")
 
 
 func change_ball(upbool):
@@ -149,13 +152,13 @@ func change_ball(upbool):
 		ball_bounce_mod = 0.4
 		ball_prefab = ball4_prefab
 	elif ball_index == 5:
-		ball_bounce_mod = 1
+		ball_bounce_mod = 0.7
 		ball_prefab = ball5_prefab
 	elif ball_index == 6:
 		ball_bounce_mod = 0.2
 		ball_prefab = ball6_prefab
 	elif ball_index == 7:
-		ball_bounce_mod = 0.8
+		ball_bounce_mod = 0.4
 		ball_prefab = ball7_prefab
 	elif ball_index == 8:
 		ball_bounce_mod = 0.3

@@ -141,47 +141,57 @@ func check_roomname():
 
 
 func _on_ExitButton_pressed():
-	get_tree().call_group("gameui", "done_shopping")
-	visible = false
+	if visible:
+		$ClickSound.play()
+		get_tree().call_group("gameui", "done_shopping")
+		visible = false
 
 
 func _on_BallDownButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_ball(false)
 
 
 func _on_BallUpButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_ball(true)
 
 
 func _on_HoopDownButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_hoop(false)
 
 
 func _on_HoopUpButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_hoop(true)
 
 
 func _on_CageDownButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_cage(false)
 
 
 func _on_CageUpButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_cage(true)
 
 
 func _on_RoomDownButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_room(false)
 
 
 func _on_RoomUpButton_pressed():
 	if visible:
+		$ClickSound.play()
 		GameBrain.change_room(true)
 
 
@@ -192,6 +202,9 @@ func _on_BuyBallsButton_pressed():
 			GameBrain.game_data["balls total"] += 1
 			GameBrain.game_data["balls left"] = GameBrain.game_data["balls total"]
 			Data.save()
+			$BuySound.play()
+		else:
+			$CantSound.play()
 
 
 func _on_BuyBallSkinButton_pressed():
@@ -200,6 +213,9 @@ func _on_BuyBallSkinButton_pressed():
 			GameBrain.game_data["tickets"] -= 2000
 			GameBrain.game_data["unlocked balls"] += 1
 			Data.save()
+			$BuySound.play()
+		else:
+			$CantSound.play()
 
 
 func _on_BuyHoopSkinButton_pressed():
@@ -208,6 +224,9 @@ func _on_BuyHoopSkinButton_pressed():
 			GameBrain.game_data["tickets"] -= 5000
 			GameBrain.game_data["unlocked hoops"] += 1
 			Data.save()
+			$BuySound.play()
+		else:
+			$CantSound.play()
 
 
 func _on_BuyCageSkinButton_pressed():
@@ -216,6 +235,9 @@ func _on_BuyCageSkinButton_pressed():
 			GameBrain.game_data["tickets"] -= 10000
 			GameBrain.game_data["unlocked cages"] += 1
 			Data.save()
+			$BuySound.play()
+		else:
+			$CantSound.play()
 
 
 func _on_BuyRoomSkinButton_pressed():
@@ -224,12 +246,18 @@ func _on_BuyRoomSkinButton_pressed():
 			GameBrain.game_data["tickets"] -= 50000
 			GameBrain.game_data["unlocked rooms"] += 1
 			Data.save()
+			$BuySound.play()
+		else:
+			$CantSound.play()
 
 
 func _on_BuyAimLevelButton_pressed():
 	if visible:
 		if GameBrain.game_data["tickets"] >= 500:
 			GameBrain.game_data["tickets"] -= 500
-			GameBrain.game_data["aim skill"] = clamp(GameBrain.game_data["aim skill"] - 0.01, 0.01, 1.0)
+			GameBrain.game_data["aim skill"] = clamp(GameBrain.game_data["aim skill"] - 0.05, 0.01, 1.0)
 			GameBrain.game_data["aim skill level"] += 1
 			Data.save()
+			$BuySound.play()
+		else:
+			$CantSound.play()
