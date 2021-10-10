@@ -47,6 +47,7 @@ func _ready():
 	
 
 func propose_reward():
+	Data.save()
 	var bribe = round(rand_range(50,100)) * GameBrain.game_data["level"]
 	GameBrain.current_bribe_amount = bribe
 	adbribetext.bbcode_text = str("[center]" + str(bribe) + " tickets[/center]")
@@ -96,6 +97,7 @@ func update_hud():
 
 func done_shopping():
 	shopping = false
+	Data.save()
 
 
 func _on_TouchScreenButton_pressed():
@@ -125,6 +127,7 @@ func _on_AdTimer_timeout():
 
 
 func _on_ShopButton_pressed():
+	Data.save()
 	if !proposing_ad:
 		$ClickSound.play()
 		$Shop.visible = true
@@ -137,6 +140,7 @@ func _on_NoticeStartTimer_timeout():
 
 
 func _on_AdAcceptButton_pressed():
+	Data.save()
 	if proposing_ad:
 		$ClickSound.play()
 		$AdGuy.go_reward()
@@ -145,6 +149,7 @@ func _on_AdAcceptButton_pressed():
 
 
 func _on_AdDeclineButton_pressed():
+	Data.save()
 	if proposing_ad:
 		$ClickSound.play()
 		$AdProposal.visible = false
@@ -156,12 +161,14 @@ func _on_AdDeclineButton_pressed():
 
 
 func _on_KeepPlayingButton_pressed():
+	Data.save()
 	if $QuitQuery.visible:
 		$ClickSound.play()
 		$QuitQuery.visible = false
 
 
 func _on_QuitGameButton_pressed():
+	Data.save()
 	if $QuitQuery.visible:
 		$ClickSound.play()
 		get_tree().quit()

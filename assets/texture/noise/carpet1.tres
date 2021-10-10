@@ -6,7 +6,7 @@ persistence = 0.0
 lacunarity = 4.0
 
 [resource]
-width = 128
-height = 128
+width = 32
+height = 32
 seamless = true
 noise = SubResource( 1 )

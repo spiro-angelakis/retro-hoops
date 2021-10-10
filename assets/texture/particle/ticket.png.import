@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.s3tc.stex"
 path.etc2="res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.etc2.stex"
+path.etc="res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/texture/particle/ticket.png"
-dest_files=[ "res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.s3tc.stex", "res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.etc2.stex" ]
+dest_files=[ "res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.s3tc.stex", "res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.etc2.stex", "res://.import/ticket.png-83fc84a5c74ddb3c9461bd073c76e906.etc.stex" ]
 
 [params]
 

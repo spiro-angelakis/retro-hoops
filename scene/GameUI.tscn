@@ -91,19 +91,19 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="DynamicFont" id=15]
 size = 28
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=16]
 size = 28
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=17]
 size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -1066,6 +1066,10 @@ autostart = true
 wait_time = 5.0
 one_shot = true
 
+[node name="AdRollTimer" type="Timer" parent="AdGuy"]
+wait_time = 5.0
+one_shot = true
+
 [node name="NoticeStart" type="CenterContainer" parent="."]
 margin_right = 600.0
 margin_bottom = 1024.0
@@ -1137,7 +1141,7 @@ margin_top = 104.0
 margin_right = 400.0
 margin_bottom = 204.0
 rect_min_size = Vector2( 400, 100 )
-custom_fonts/normal_font = SubResource( 17 )
+custom_fonts/normal_font = SubResource( 15 )
 custom_colors/default_color = Color( 0, 1, 0.694118, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]100  tickets[/center]"
@@ -1148,7 +1152,7 @@ margin_top = 208.0
 margin_right = 400.0
 margin_bottom = 288.0
 rect_min_size = Vector2( 400, 80 )
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
 custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
 custom_colors/font_color = Color( 0.0470588, 1, 0, 1 )
 text = "YES, TICKETS!"
@@ -1158,7 +1162,7 @@ margin_top = 292.0
 margin_right = 400.0
 margin_bottom = 372.0
 rect_min_size = Vector2( 400, 80 )
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
 custom_colors/font_color = Color( 1, 0.211765, 0, 1 )
 text = "I don't want free tickets"
@@ -1191,7 +1195,7 @@ rect_min_size = Vector2( 400, 200 )
 margin_right = 400.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 400, 80 )
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
 custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
 custom_colors/font_color = Color( 0.0470588, 1, 0, 1 )
 text = "Back to Game"
@@ -1201,7 +1205,7 @@ margin_top = 84.0
 margin_right = 400.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 400, 80 )
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color_disabled = Color( 0.164706, 1, 0, 1 )
 custom_colors/font_color = Color( 1, 0.211765, 0, 1 )
 text = "quit game"
@@ -1237,6 +1241,7 @@ stream = SubResource( 9 )
 [connection signal="rewarded_video_left_application" from="AdGuy/AdMob" to="AdGuy" method="_on_AdMob_rewarded_video_left_application"]
 [connection signal="timeout" from="AdGuy/LoadTimer" to="AdGuy" method="_on_LoadTimer_timeout"]
 [connection signal="timeout" from="AdGuy/PassiveAdTimer" to="AdGuy" method="_on_PassiveAdTimer_timeout"]
+[connection signal="timeout" from="AdGuy/AdRollTimer" to="AdGuy" method="_on_AdRollTimer_timeout"]
 [connection signal="timeout" from="NoticeStart/NoticeStartTimer" to="." method="_on_NoticeStartTimer_timeout"]
 [connection signal="pressed" from="AdProposal/VBoxContainer/AdAcceptButton" to="." method="_on_AdAcceptButton_pressed"]
 [connection signal="pressed" from="AdProposal/VBoxContainer/AdDeclineButton" to="." method="_on_AdDeclineButton_pressed"]

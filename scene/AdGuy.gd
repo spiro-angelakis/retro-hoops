@@ -91,7 +91,7 @@ func _on_AdMob_rewarded_video_closed():
 	admob.load_rewarded_video()
 	debug_out.text = debug_out.text + "Rewarded video closed\n"
 	$"CanvasLayer/BtnRewardedVideo".disabled = true
-	admob.load_rewarded_video()
+	#admob.load_rewarded_video()
 
 func _on_AdMob_rewarded_video_failed_to_load(error_code):
 	admob.load_rewarded_video()
@@ -114,9 +114,8 @@ func _on_AdMob_rewarded_video_started():
 
 func roll_passive_ad():
 	if can_do_passive:
-		admob.show_interstitial()
-		can_do_passive = false
-		$PassiveAdTimer.start(7)
+		$AdRollTimer.start(5)
+		admob.load_interstitial()
 
 
 func _on_LoadTimer_timeout():
@@ -126,3 +125,10 @@ func _on_LoadTimer_timeout():
 
 func _on_PassiveAdTimer_timeout():
 	can_do_passive = true
+
+
+func _on_AdRollTimer_timeout():
+	if admob.is_interstitial_loaded():
+		admob.show_interstitial()
+		can_do_passive = false
+		$PassiveAdTimer.start(7)

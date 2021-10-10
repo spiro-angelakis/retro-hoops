@@ -16,6 +16,25 @@ var current_scene
 
 
 
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var ss = OS.get_screen_size(-1)
+	#GameBrain.screen_size_vec = ss
+	ProjectSettings.set_setting("display/window/size/resizable", true)
+	ProjectSettings.set_setting("display/window/size/width", ss.x)
+	ProjectSettings.set_setting("display/window/size/height", ss.y)
+	ProjectSettings.set_setting("display/window/size/test_width", ss.x)
+	ProjectSettings.set_setting("display/window/size/test_height", ss.y)
+	$AnimationPlayer.play("booting")
+	var data = Data.load_game()
+	if typeof(data) == TYPE_DICTIONARY: # we have a save to load
+		GameBrain.game_data = data
+	else:
+		pass
+	goto_scene("res://scene/GameUI.tscn")
+
+
+
 func goto_scene(path): # game requests to switch to this scene
 	loader = ResourceLoader.load_interactive(path)
 	set_process(true)
@@ -63,25 +82,5 @@ func set_new_scene(resource):
 	get_parent().add_child(loaded_scene)
 	get_parent().remove_child(self)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var ss = OS.get_screen_size(-1)
-	#GameBrain.screen_size_vec = ss
-	ProjectSettings.set_setting("display/window/size/resizable", true)
-	ProjectSettings.set_setting("display/window/size/width", ss.x)
-	ProjectSettings.set_setting("display/window/size/height", ss.y)
-	ProjectSettings.set_setting("display/window/size/test_width", ss.x)
-	ProjectSettings.set_setting("display/window/size/test_height", ss.y)
-	$AnimationPlayer.play("booting")
-	var data = Data.load()
-	if typeof(data) == TYPE_DICTIONARY: # we have a save to load
-		GameBrain.game_data = data
-	else:
-		pass
-	goto_scene("res://scene/GameUI.tscn")
 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

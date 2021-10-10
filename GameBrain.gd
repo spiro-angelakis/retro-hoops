@@ -119,6 +119,7 @@ func _process(delta):
 			if game_data.level > 1:
 				var chance_to_propose = round(rand_range(0,1))
 				if chance_to_propose == 1:
+					Data.save()
 					get_tree().call_group("gameui", "propose_reward")
 		
 		if game_data.level > 1 and shots_missed >= 5:
@@ -129,6 +130,7 @@ func _process(delta):
 				var do_ad = round(rand_range(0,2))
 				if do_ad == 2:
 					downlevels_without_ad = 0
+					Data.save()
 					get_tree().call_group("adguy", "roll_passive_ad")
 
 
