@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hammer03.obj-ae52cb0dc8e32cb531bf167544089953.mesh"
+
+[deps]
+
+files=[ "res://.import/Hammer03.obj-ae52cb0dc8e32cb531bf167544089953.mesh" ]
+
+source_file="res://assets/fbx/Hammer03.obj"
+dest_files=[ "res://.import/Hammer03.obj-ae52cb0dc8e32cb531bf167544089953.mesh", "res://.import/Hammer03.obj-ae52cb0dc8e32cb531bf167544089953.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

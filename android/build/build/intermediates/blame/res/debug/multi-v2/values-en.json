@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Angel\\HDD Documents\\git_work\\retro-hoops\\android\\build\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
+            "outputFile": "C:\\Users\\Buddy\\HDD Documents\\git_work\\retro-hoops\\android\\build\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Angel\\HDD Documents\\git_work\\retro-hoops\\android\\build\\res\\values-en\\godot_project_name_string.xml",
+                    "source": "C:\\Users\\Buddy\\HDD Documents\\git_work\\retro-hoops\\android\\build\\res\\values-en\\godot_project_name_string.xml",
                     "from": {
                         "startLines": "3",
                         "startColumns": "1",

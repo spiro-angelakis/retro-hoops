@@ -3,7 +3,8 @@
     package="com.sprvlln.retrohoops"
     android:installLocation="auto"
     android:versionCode="2"
-    android:versionName="2.0" > <!-- glEsVersion is modified by the exporter, changing this value here has no effect. -->
+    android:versionName="4.0" >
+
     <uses-sdk
         android:minSdkVersion="18"
         android:targetSdkVersion="29" />
@@ -14,11 +15,8 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-    <uses-feature
-        android:glEsVersion="0x00030000"
-        android:required="true" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <instrumentation
@@ -26,8 +24,10 @@
         android:icon="@mipmap/icon"
         android:label="@string/godot_project_name_string"
         android:targetPackage="com.sprvlln.retrohoops" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- glEsVersion is modified by the exporter, changing this value here has no effect. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="false"
@@ -53,36 +53,12 @@
         <!-- Records the version of the Godot editor used for building -->
         <meta-data
             android:name="org.godotengine.editor.version"
-            android:value="3.3.stable" /> <!-- Custom application XML added by add-ons. -->
-        <!-- CHUNK_APPLICATION_BEGIN -->
-        <!-- CHUNK_APPLICATION_END -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" /> <!-- Records the version of the Godot library -->
+            android:value="3.3.2.stable" /> <!-- Records the version of the Godot library -->
         <meta-data
             android:name="org.godotengine.library.version"
-            android:value="3.3.0.stable" />
+            android:value="3.3.2.stable" />
 
         <service android:name="org.godotengine.godot.GodotDownloaderService" />
-
-        <meta-data
-            android:name="org.godotengine.plugin.v1.GodotAdMob"
-            android:value="shinnil.godot.plugin.android.godotadmob.GodotAdMob" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
-        <activity
-            android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent" />
-
-        <provider
-            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
-            android:authorities="com.sprvlln.retrohoops.mobileadsinitprovider"
-            android:exported="false"
-            android:initOrder="100" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

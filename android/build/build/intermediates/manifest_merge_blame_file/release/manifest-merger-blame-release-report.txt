@@ -1,0 +1,112 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.sprvlln.retrohoops"
+4    android:installLocation="auto"
+5    android:versionCode="2"
+6    android:versionName="4.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="18"
+10        android:targetSdkVersion="29" />
+11
+12    <supports-screens
+12-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:12:5-16:40
+13        android:largeScreens="true"
+13-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:15:9-36
+14        android:normalScreens="true"
+14-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:14:9-37
+15        android:smallScreens="true"
+15-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:13:9-36
+16        android:xlargeScreens="true" />
+16-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:16:9-37
+17
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:10:5-79
+18-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:10:22-76
+19    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+19-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:11:5-76
+19-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:11:22-73
+20    <uses-permission android:name="android.permission.INTERNET" />
+20-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:12:5-67
+20-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:12:22-64
+21
+22    <instrumentation
+22-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:13:5-18:58
+23        android:name=".GodotInstrumentation"
+23-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:15:9-45
+24        android:icon="@mipmap/icon"
+24-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:16:9-36
+25        android:label="@string/godot_project_name_string"
+25-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:17:9-58
+26        android:targetPackage="com.sprvlln.retrohoops" />
+26-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\src\release\AndroidManifest.xml:18:9-55
+27    <!-- glEsVersion is modified by the exporter, changing this value here has no effect. -->
+28    <uses-feature
+28-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:19:5-21:35
+29        android:glEsVersion="0x00020000"
+29-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:20:9-41
+30        android:required="true" />
+30-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:21:9-32
+31
+32    <application
+32-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:31:5-72:19
+33        android:allowBackup="false"
+33-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:31:68-95
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.0.0] C:\Users\Buddy\.gradle\caches\transforms-2\files-2.1\61f903db516e52d8783db3337e87ee1a\core-1.0.0\AndroidManifest.xml:22:18-86
+35        android:icon="@mipmap/icon"
+35-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:31:181-208
+36        android:label="@string/godot_project_name_string"
+36-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:31:18-67
+37        android:requestLegacyExternalStorage="false" >
+37-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:31:136-180
+38        <activity
+38-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:46:9-63:20
+39            android:name="com.godot.game.GodotApp"
+39-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:47:13-37
+40            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode"
+40-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:52:13-141
+41            android:label="@string/godot_project_name_string"
+41-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:48:13-62
+42            android:launchMode="singleTask"
+42-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:50:13-44
+43            android:resizeableActivity="false"
+43-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:53:13-47
+44            android:screenOrientation="portrait"
+44-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:51:13-50
+45            android:theme="@style/GodotAppSplashTheme" >
+45-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:49:13-55
+46            <intent-filter>
+46-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:59:13-62:29
+47                <action android:name="android.intent.action.MAIN" />
+47-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:60:17-69
+47-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:60:25-66
+48
+49                <category android:name="android.intent.category.LAUNCHER" />
+49-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:61:17-77
+49-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:61:27-74
+50            </intent-filter>
+51        </activity>
+52        <!-- Records the version of the Godot editor used for building -->
+53        <meta-data
+54            android:name="org.godotengine.editor.version"
+55            android:value="3.3.2.stable" /> <!-- Custom application XML added by add-ons. -->
+56        <meta-data
+56-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:66:3-68:69
+57            android:name="com.google.android.gms.ads.APPLICATION_ID"
+57-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:67:13-69
+58            android:value="ca-app-pub-6621437871185283~9416703989" /> <!-- Records the version of the Godot library -->
+58-->C:\Users\Buddy\HDD Documents\git_work\retro-hoops\android\build\AndroidManifest.xml:68:13-67
+59        <meta-data
+59-->[godot-lib.release.aar] C:\Users\Buddy\.gradle\caches\transforms-2\files-2.1\785d704f1188ec74b9b132bc13f3aff4\jetified-godot-lib.release\AndroidManifest.xml:20:9-22:44
+60            android:name="org.godotengine.library.version"
+60-->[godot-lib.release.aar] C:\Users\Buddy\.gradle\caches\transforms-2\files-2.1\785d704f1188ec74b9b132bc13f3aff4\jetified-godot-lib.release\AndroidManifest.xml:21:13-59
+61            android:value="3.3.2.stable" />
+61-->[godot-lib.release.aar] C:\Users\Buddy\.gradle\caches\transforms-2\files-2.1\785d704f1188ec74b9b132bc13f3aff4\jetified-godot-lib.release\AndroidManifest.xml:22:13-41
+62
+63        <service android:name="org.godotengine.godot.GodotDownloaderService" />
+63-->[godot-lib.release.aar] C:\Users\Buddy\.gradle\caches\transforms-2\files-2.1\785d704f1188ec74b9b132bc13f3aff4\jetified-godot-lib.release\AndroidManifest.xml:24:9-80
+63-->[godot-lib.release.aar] C:\Users\Buddy\.gradle\caches\transforms-2\files-2.1\785d704f1188ec74b9b132bc13f3aff4\jetified-godot-lib.release\AndroidManifest.xml:24:18-77
+64    </application>
+65
+66</manifest>

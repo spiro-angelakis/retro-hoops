@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.s3tc.stex"
 path.etc2="res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.etc2.stex"
+path.etc="res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/texture/particle/dust.png"
-dest_files=[ "res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.s3tc.stex", "res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.etc2.stex" ]
+dest_files=[ "res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.s3tc.stex", "res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.etc2.stex", "res://.import/dust.png-0e15ec2b69f6434b4b32d7e5ec8f25cf.etc.stex" ]
 
 [params]
 
