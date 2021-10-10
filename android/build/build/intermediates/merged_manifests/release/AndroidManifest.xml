@@ -3,7 +3,7 @@
     package="com.sprvlln.retrohoops"
     android:installLocation="auto"
     android:versionCode="2"
-    android:versionName="4.0" >
+    android:versionName="6.0" >
 
     <uses-sdk
         android:minSdkVersion="18"
