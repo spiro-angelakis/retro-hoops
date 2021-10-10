@@ -4,6 +4,23 @@
             "outputFile": "C:\\Users\\Buddy\\HDD Documents\\git_work\\retro-hoops\\android\\build\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-vi\\values-vi.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\Buddy\\.gradle\\caches\\transforms-2\\files-2.1\\e5df49c1c3f6c08e72304aa03642d0bd\\jetified-play-services-basement-17.0.0\\res\\values-vi\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "194",
+                        "endOffsets": "441"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "105",
+                        "endColumns": "194",
+                        "endOffsets": "295"
+                    }
+                },
+                {
                     "source": "C:\\Users\\Buddy\\HDD Documents\\git_work\\retro-hoops\\android\\build\\res\\values-vi\\godot_project_name_string.xml",
                     "from": {
                         "startLines": "3",
@@ -13,11 +30,11 @@
                         "endOffsets": "172"
                     },
                     "to": {
-                        "startLines": "2",
+                        "startLines": "3",
                         "startColumns": "4",
-                        "startOffsets": "55",
+                        "startOffsets": "300",
                         "endColumns": "64",
-                        "endOffsets": "115"
+                        "endOffsets": "360"
                     }
                 },
                 {
@@ -30,11 +47,28 @@
                         "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "3",
+                        "startLines": "11",
                         "startColumns": "4",
-                        "startOffsets": "120",
+                        "startOffsets": "953",
                         "endColumns": "100",
-                        "endOffsets": "216"
+                        "endOffsets": "1049"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Buddy\\.gradle\\caches\\transforms-2\\files-2.1\\a7ad5a81b07168db60b339a3a943336d\\jetified-play-services-ads-19.3.0\\res\\values-vi\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10",
+                        "startColumns": "0,0,0,0,0,0,0",
+                        "startOffsets": "199,268,381,448,513,587,681",
+                        "endColumns": "68,112,66,64,73,93,77",
+                        "endOffsets": "267,380,447,512,586,680,758"
+                    },
+                    "to": {
+                        "startLines": "4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "365,438,555,626,695,773,871",
+                        "endColumns": "72,116,70,68,77,97,81",
+                        "endOffsets": "433,550,621,690,768,866,948"
                     }
                 }
             ]

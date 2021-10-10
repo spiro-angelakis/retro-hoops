@@ -332,8 +332,113 @@ library {
   }
 }
 library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-ads"
+    version: "19.3.0"
+  }
+  digests {
+    sha256: "\331\343\350u,\326\263\305i\313\0035\274~\363\243\271I\376\3677.\r\316\030\006\240\005\a\2063h"
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.browser"
+    artifactId: "browser"
+    version: "1.0.0"
+  }
+  digests {
+    sha256: "\033\037\305\303\261\354\214\376A\ro4_\347\2634 cKx7\251\206\365\377\304t\340d9\204\321"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-ads-base"
+    version: "19.3.0"
+  }
+  digests {
+    sha256: "\377)Y\315\215k\021\277\234\347>\v\334\230!0 \373\377hZ\256V1\231\2553\340z\207j\027"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-ads-identifier"
+    version: "17.0.0"
+  }
+  digests {
+    sha256: "\260\034@\214&[:\241q\321\233\350m{\215O4T\363\bQi\247ui\nj\205\365z\273s"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-ads-lite"
+    version: "19.3.0"
+  }
+  digests {
+    sha256: "2\207>9\345\320K/\233\027\023\237x\033-Vy\326\345P\r\306pa7\2731^i\240\364\325"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-basement"
+    version: "17.0.0"
+  }
+  digests {
+    sha256: "\323$\241x[\274H\277\343c\237\310G\317\323\317C\324\236\226{\\\257\'\224$\n\205EW\243\234"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-gass"
+    version: "19.3.0"
+  }
+  digests {
+    sha256: "mX/\'C2>X}:\033C>\323+s\342\006\303o^\314\305\252\221\375\351\022}Z\374\a"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-measurement-sdk-api"
+    version: "17.1.0"
+  }
+  digests {
+    sha256: "\023\354\035\270%\304\247[\202\317qHPpMk\254A\254\274p\006\036,\177\204\t\301xj!\206"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-measurement-base"
+    version: "17.1.0"
+  }
+  digests {
+    sha256: "\373:\214]/\225\342\243\375*\275K\267\226\302\310\2377i\211,\212E\373T\240=\365D\343\334\331"
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-tasks"
+    version: "17.0.0"
+  }
+  digests {
+    sha256: ".m\0278\2676G\363\376z\003\213\227\200\271w\027\263tn\256%\200\t\031~6\347\2771\022\245"
+  }
+}
+library {
   digests {
     sha256: "\244|Tt\321\331a8\034\030\\\223\325Y\213\253\303BU\255:\213Vc\353Jf\\/\362\031)"
+  }
+}
+library {
+  digests {
+    sha256: "\220\331\371\377t\240\251=\354\262u\361\2307\001d\307\300\244\271\2134a\243\252\354e\2245\246\031\357"
   }
 }
 library_dependencies {
@@ -520,6 +625,68 @@ library_dependencies {
 }
 library_dependencies {
   library_index: 33
+  library_dep_index: 34
+  library_dep_index: 7
+  library_dep_index: 2
+  library_dep_index: 35
+  library_dep_index: 36
+  library_dep_index: 37
+  library_dep_index: 38
+  library_dep_index: 39
+}
+library_dependencies {
+  library_index: 34
+  library_dep_index: 2
+  library_dep_index: 1
+  library_dep_index: 29
+  library_dep_index: 7
+  library_dep_index: 22
+}
+library_dependencies {
+  library_index: 35
+}
+library_dependencies {
+  library_index: 36
+  library_dep_index: 38
+}
+library_dependencies {
+  library_index: 38
+  library_dep_index: 7
+  library_dep_index: 2
+  library_dep_index: 23
+}
+library_dependencies {
+  library_index: 37
+  library_dep_index: 35
+  library_dep_index: 38
+  library_dep_index: 40
+}
+library_dependencies {
+  library_index: 40
+  library_dep_index: 38
+  library_dep_index: 41
+}
+library_dependencies {
+  library_index: 41
+  library_dep_index: 38
+}
+library_dependencies {
+  library_index: 39
+  library_dep_index: 35
+  library_dep_index: 36
+  library_dep_index: 37
+  library_dep_index: 38
+  library_dep_index: 42
+}
+library_dependencies {
+  library_index: 42
+  library_dep_index: 38
+}
+library_dependencies {
+  library_index: 43
+}
+library_dependencies {
+  library_index: 44
 }
 module_dependencies {
   module_name: "base"
@@ -527,4 +694,6 @@ module_dependencies {
   dependency_index: 16
   dependency_index: 33
   dependency_index: 20
+  dependency_index: 43
+  dependency_index: 44
 }
