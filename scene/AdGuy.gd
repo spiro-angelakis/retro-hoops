@@ -19,7 +19,10 @@ func loadAds() -> void:
 	
 
 func go_reward():
-	admob.show_rewarded_video()
+	if admob.is_rewarded_video_loaded():
+		admob.show_rewarded_video()
+	else:
+		admob.load_rewarded_video()
 
 # buttons callbacks
 func _on_BtnReload_pressed() -> void:
@@ -114,7 +117,7 @@ func _on_AdMob_rewarded_video_started():
 
 func roll_passive_ad():
 	if can_do_passive:
-		$AdRollTimer.start(5)
+		$AdRollTimer.start(1)
 		admob.load_interstitial()
 
 
@@ -132,3 +135,5 @@ func _on_AdRollTimer_timeout():
 		admob.show_interstitial()
 		can_do_passive = false
 		$PassiveAdTimer.start(7)
+	else:
+		admob.load_interstitial()
