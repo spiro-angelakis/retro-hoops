@@ -31,9 +31,7 @@ albedo_color = Color( 0.109804, 0.109804, 0.109804, 1 )
 
 [node name="RoomSkin" type="Spatial"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="." groups=[
-"hard",
-]]
+[node name="CSGCombiner" type="CSGCombiner" parent="." groups=["hard"]]
 use_collision = true
 
 [node name="wall" type="CSGBox" parent="CSGCombiner"]
