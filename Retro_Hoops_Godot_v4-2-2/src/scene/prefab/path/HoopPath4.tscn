@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/scene/prefab/path/HoopPath.gd" id="1"]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.271663, 4.27468, -4.10822, 0, 0, 0, 0, 0, 0, -1.2148, 4.06073, -4.22644, 0, 0, 0, 0, 0, 0, -0.799531, 1.49719, -3.82477, 0, 0, 0, 0, 0, 0, 1.14, 1.96484, -3.72211, 0, 0, 0, 0, 0, 0, 0.271663, 4.27468, -4.10822 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[node name="HoopPath4" type="Path"]
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="PathFollow" type="PathFollow" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271663, 4.27468, -4.10822 )
+rotation_mode = 1
+cubic_interp = false

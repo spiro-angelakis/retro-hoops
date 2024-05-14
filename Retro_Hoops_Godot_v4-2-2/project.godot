@@ -1,0 +1,50 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Retro Hoops"
+config/description="A retro basketball arcade game simulator."
+config/version="2.0"
+run/main_scene="res://src/scene/boot.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="retro_hoops"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://src/assets/texture/ui/splash_screen_600x1024.png"
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameBrain="*res://src/assets/script/GameBrain.gd"
+Data="*res://src/assets/script/Data.gd"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=1024
+window/handheld/orientation=1
+
+[input]
+
+p={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":112,"echo":false,"script":null)
+]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -1,0 +1,162 @@
+[gd_resource type="AudioBusLayout" load_steps=16 format=3 uid="uid://bl4r5ligyxm4g"]
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_dt3p8"]
+resource_name = "HighPassFilter"
+cutoff_hz = 1000.0
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_udfn6"]
+resource_name = "LowPassFilter"
+cutoff_hz = 1000.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_2hdoa"]
+resource_name = "Reverb"
+predelay_msec = 85.0
+predelay_feedback = 0.1
+room_size = 0.35
+damping = 0.09
+spread = 0.2
+wet = 0.28
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_0sbdd"]
+resource_name = "Reverb"
+predelay_msec = 20.0
+predelay_feedback = 0.11
+room_size = 0.07
+damping = 0.19
+spread = 0.25
+hipass = 0.46
+wet = 0.18
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_l20o6"]
+resource_name = "HighPassFilter"
+cutoff_hz = 1000.0
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_hy7rk"]
+resource_name = "HighPassFilter"
+cutoff_hz = 1000.0
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_cts0u"]
+resource_name = "LowPassFilter"
+cutoff_hz = 1000.0
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_d2d4o"]
+resource_name = "HighPassFilter"
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_be3mx"]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_2cyld"]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_36upn"]
+resource_name = "HighPassFilter"
+
+[sub_resource type="AudioEffectLowShelfFilter" id="AudioEffectLowShelfFilter_ys2cd"]
+resource_name = "LowShelfFilter"
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_ps8c7"]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_82kj1"]
+resource_name = "Reverb"
+predelay_msec = 65.0
+predelay_feedback = 0.07
+room_size = 0.14
+damping = 0.07
+spread = 0.24
+hipass = 0.49
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_dj15d"]
+resource_name = "HighPassFilter"
+
+[resource]
+bus/1/name = &"SFX"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/2/name = &"Ball"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"SFX"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_0sbdd")
+bus/2/effect/0/enabled = true
+bus/3/name = &"BallBounce"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Ball"
+bus/4/name = &"BallThrow"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Ball"
+bus/4/effect/0/effect = SubResource("AudioEffectHighPassFilter_l20o6")
+bus/4/effect/0/enabled = true
+bus/5/name = &"Swish"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Ball"
+bus/5/effect/0/effect = SubResource("AudioEffectHighPassFilter_hy7rk")
+bus/5/effect/0/enabled = true
+bus/5/effect/1/effect = SubResource("AudioEffectLowPassFilter_cts0u")
+bus/5/effect/1/enabled = true
+bus/6/name = &"UI"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = 0.0
+bus/6/send = &"SFX"
+bus/7/name = &"Click"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0
+bus/7/send = &"UI"
+bus/7/effect/0/effect = SubResource("AudioEffectHighPassFilter_d2d4o")
+bus/7/effect/0/enabled = true
+bus/7/effect/1/effect = SubResource("AudioEffectLowPassFilter_be3mx")
+bus/7/effect/1/enabled = true
+bus/8/name = &"Uhuh"
+bus/8/solo = false
+bus/8/mute = false
+bus/8/bypass_fx = false
+bus/8/volume_db = 0.0
+bus/8/send = &"UI"
+bus/8/effect/0/effect = SubResource("AudioEffectLowPassFilter_2cyld")
+bus/8/effect/0/enabled = true
+bus/8/effect/1/effect = SubResource("AudioEffectHighPassFilter_36upn")
+bus/8/effect/1/enabled = true
+bus/8/effect/2/effect = SubResource("AudioEffectLowShelfFilter_ys2cd")
+bus/8/effect/2/enabled = true
+bus/9/name = &"Buy"
+bus/9/solo = false
+bus/9/mute = false
+bus/9/bypass_fx = false
+bus/9/volume_db = 0.0
+bus/9/send = &"UI"
+bus/9/effect/0/effect = SubResource("AudioEffectLowPassFilter_ps8c7")
+bus/9/effect/0/enabled = true
+bus/9/effect/1/effect = SubResource("AudioEffectReverb_82kj1")
+bus/9/effect/1/enabled = true
+bus/9/effect/2/effect = SubResource("AudioEffectHighPassFilter_dj15d")
+bus/9/effect/2/enabled = true
+bus/10/name = &"Horn"
+bus/10/solo = false
+bus/10/mute = false
+bus/10/bypass_fx = false
+bus/10/volume_db = 0.0
+bus/10/send = &"SFX"
+bus/10/effect/0/effect = SubResource("AudioEffectHighPassFilter_dt3p8")
+bus/10/effect/0/enabled = true
+bus/10/effect/1/effect = SubResource("AudioEffectLowPassFilter_udfn6")
+bus/10/effect/1/enabled = true
+bus/10/effect/2/effect = SubResource("AudioEffectReverb_2hdoa")
+bus/10/effect/2/enabled = true

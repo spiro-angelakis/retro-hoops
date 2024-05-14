@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxj2k4i6og6cf"]
+
+[ext_resource type="Script" path="res://src/scene/boot.gd" id="1_dl0bi"]
+[ext_resource type="ArrayMesh" uid="uid://bgyswsxtch0fb" path="res://src/assets/mesh/BasketballBall.mesh" id="1_roe57"]
+[ext_resource type="ArrayMesh" uid="uid://b60f58h8du4u2" path="res://src/assets/mesh/glasbball.tres" id="2_x8pxf"]
+[ext_resource type="Texture2D" uid="uid://c7bf3tiro4j84" path="res://src/assets/texture/ui/title_text_1.png" id="3_1kbg0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_frsja"]
+sky_top_color = Color(1, 0.773423, 0.667871, 1)
+sky_horizon_color = Color(0.235294, 0.647059, 0, 1)
+ground_bottom_color = Color(0.254906, 0.649978, 0.270625, 1)
+ground_horizon_color = Color(0.235294, 0.647059, 0, 1)
+
+[sub_resource type="Sky" id="Sky_huke6"]
+sky_material = SubResource("ProceduralSkyMaterial_frsja")
+
+[sub_resource type="Environment" id="Environment_h4q6t"]
+background_mode = 2
+sky = SubResource("Sky_huke6")
+
+[node name="Boot" type="Node3D"]
+script = ExtResource("1_dl0bi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h4q6t")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.12051)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 64
+lifetime = 4.0
+mesh = ExtResource("1_roe57")
+emission_shape = 2
+emission_sphere_radius = 25.0
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+spread = 180.0
+flatness = 0.45
+initial_velocity_min = 10.1
+initial_velocity_max = 111.11
+angular_velocity_max = 0.01
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 100.0
+scale_amount_max = 1000.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.666975, 0.74508, 0, -0.74508, 0.666975, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-402.946, 291.295, -52.74, 295.248, 388.974, -107.368, -21.5223, -117.67, -485.48, 0, -0.935, 0)
+mesh = ExtResource("2_x8pxf")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.85, 3.805)
+texture = ExtResource("3_1kbg0")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

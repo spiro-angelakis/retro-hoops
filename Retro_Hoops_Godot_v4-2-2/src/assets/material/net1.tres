@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d1eoy30gd15q1"]
+
+[ext_resource type="Texture2D" uid="uid://8yu782fgx8hk" path="res://src/assets/texture/object/fishnet1.png" id="1_1ach3"]
+
+[resource]
+transparency = 1
+diffuse_mode = 4
+albedo_texture = ExtResource("1_1ach3")
+uv1_scale = Vector3(10, 10, 10)

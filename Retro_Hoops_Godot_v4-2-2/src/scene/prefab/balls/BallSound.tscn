@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://boib8c60g5414"]
+
+[ext_resource type="AudioStream" uid="uid://b4j83jc2172ec" path="res://src/assets/sound/fx/ball_bounce.wav" id="1_1ksp7"]
+[ext_resource type="Script" path="res://src/scene/prefab/balls/BallSound.gd" id="1_nbern"]
+[ext_resource type="AudioStream" uid="uid://cj0nvv6jpg6l7" path="res://src/assets/sound/fx/ball_throw.wav" id="2_sf7hb"]
+[ext_resource type="AudioStream" uid="uid://bfsh7cy20buav" path="res://src/assets/sound/fx/swish.wav" id="3_03e10"]
+
+[sub_resource type="SphereShape3D" id="1"]
+radius = 1.23551
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_auyh5"]
+random_pitch = 1.74
+streams_count = 1
+stream_0/stream = ExtResource("1_1ksp7")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ap61l"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("2_sf7hb")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xxsv5"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("3_03e10")
+stream_0/weight = 1.0
+
+[sub_resource type="SphereShape3D" id="5"]
+radius = 116.615
+
+[node name="BallSound" type="Node3D"]
+script = ExtResource("1_nbern")
+
+[node name="TouchArea" type="Area3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="TouchArea"]
+shape = SubResource("1")
+
+[node name="BounceSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_auyh5")
+unit_size = 0.5
+bus = &"BallBounce"
+area_mask = 16
+
+[node name="ThrowSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ap61l")
+pitch_scale = 1.16
+autoplay = true
+bus = &"BallThrow"
+
+[node name="SwishSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xxsv5")
+pitch_scale = 1.5
+bus = &"Swish"
+
+[node name="Area" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 16
+input_capture_on_drag = true
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Area"]
+shape = SubResource("5")
+
+[connection signal="area_entered" from="TouchArea" to="." method="_on_TouchArea_area_entered"]
+[connection signal="body_entered" from="TouchArea" to="." method="_on_TouchArea_body_entered"]

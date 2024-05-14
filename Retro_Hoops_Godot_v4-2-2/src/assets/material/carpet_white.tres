@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://vvvkpbjc3lac"]
+
+[sub_resource type="FastNoiseLite" id="1"]
+
+[sub_resource type="NoiseTexture2D" id="2"]
+width = 128
+height = 128
+seamless = true
+bump_strength = 7.4
+noise = SubResource("1")
+
+[resource]
+metallic = 0.12
+roughness = 0.71
+normal_enabled = true
+normal_texture = SubResource("2")

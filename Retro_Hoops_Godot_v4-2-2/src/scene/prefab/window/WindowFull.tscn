@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl2l4uavftjrn"]
+
+[ext_resource type="PackedScene" path="res://src/assets/mesh/window1/windowfull.tscn" id="1"]
+[ext_resource type="Script" path="res://src/scene/prefab/window/WindowFull.gd" id="2"]
+[ext_resource type="Material" path="res://src/assets/material/glass_lightblue.tres" id="3"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(6.35432, 6.36358, 0.405264)
+
+[node name="WindowFull" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("2")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[node name="windowfull" parent="." instance=ExtResource("1")]
+surface_material_override/0 = ExtResource("3")

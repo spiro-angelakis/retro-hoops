@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://5vmebgpkk0w1"
+path="res://.godot/imported/hoop1.obj-65cad98e0914c62c48cf7d806626ae4e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hoop1.obj-65cad98e0914c62c48cf7d806626ae4e.mesh"]
+
+source_file="res://src/assets/obj/hoopnet/hoop1.obj"
+dest_files=["res://.godot/imported/hoop1.obj-65cad98e0914c62c48cf7d806626ae4e.mesh", "res://.godot/imported/hoop1.obj-65cad98e0914c62c48cf7d806626ae4e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,776 @@
+[gd_scene load_steps=15 format=3 uid="uid://bxeie2hh06kkw"]
+
+[ext_resource type="Script" path="res://src/scene/Shop.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cjqos4pmaqwuo" path="res://src/scene/GameLevel.tscn" id="2_8rk6i"]
+[ext_resource type="Script" path="res://src/scene/GameUI.gd" id="3"]
+[ext_resource type="Script" path="res://src/scene/Sandman.gd" id="5"]
+[ext_resource type="AudioStream" uid="uid://dt6b47eo16ptw" path="res://src/assets/sound/fx/uhuh.wav" id="12"]
+[ext_resource type="AudioStream" uid="uid://b6hle7wna1spf" path="res://src/assets/sound/fx/click.wav" id="13"]
+[ext_resource type="AudioStream" uid="uid://l6cstqt77i3r" path="res://src/assets/sound/fx/buy.wav" id="14"]
+
+[sub_resource type="Shader" id="1"]
+code = "/*
+Shader from Godot Shaders - the free shader library.
+godotshaders.com/shader/pixelate
+
+This shader is under CC0 license. Feel free to use, improve and 
+change this shader according to your needs and consider sharing 
+the modified result to godotshaders.com.
+*/
+
+shader_type canvas_item;
+
+uniform int amount = 40;
+
+void fragment()
+{
+	vec2 grid_uv = round(UV * float(amount)) / float(amount);
+	
+	vec4 text = texture(TEXTURE, grid_uv);
+	
+	COLOR = text;
+}"
+
+[sub_resource type="ShaderMaterial" id="2"]
+shader = SubResource("1")
+shader_parameter/amount = 300
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(600, 1024)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kud3k"]
+random_pitch = 1.42
+streams_count = 1
+stream_0/stream = ExtResource("13")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_877e3"]
+random_pitch = 1.42
+streams_count = 1
+stream_0/stream = ExtResource("12")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cundi"]
+random_pitch = 1.28
+streams_count = 1
+stream_0/stream = ExtResource("14")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fuald"]
+random_pitch = 1.42
+streams_count = 1
+stream_0/stream = ExtResource("13")
+stream_0/weight = 1.0
+
+[node name="GameUI" type="Node2D"]
+script = ExtResource("3")
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("2")
+mouse_filter = 2
+
+[node name="Viewport" type="SubViewport" parent="ViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(600, 1024)
+render_target_update_mode = 4
+
+[node name="GameLevel" parent="ViewportContainer/Viewport" instance=ExtResource("2_8rk6i")]
+
+[node name="ThrowLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(297, 519)
+shape = SubResource("3")
+
+[node name="HUD" type="CenterContainer" parent="."]
+offset_right = 600.0
+offset_bottom = 300.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/HBoxContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ScoreText" type="RichTextLabel" parent="HUD/HBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Score: "
+
+[node name="BallsText" type="RichTextLabel" parent="HUD/HBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+
+[node name="CenterContainer2" type="CenterContainer" parent="HUD/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LevelText" type="RichTextLabel" parent="HUD/HBoxContainer/CenterContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Level: "
+
+[node name="TimeText" type="RichTextLabel" parent="HUD/HBoxContainer/CenterContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Level: "
+
+[node name="CenterContainer3" type="CenterContainer" parent="HUD/HBoxContainer"]
+custom_minimum_size = Vector2(90, 300)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer/CenterContainer3"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TicketText" type="RichTextLabel" parent="HUD/HBoxContainer/CenterContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Level: "
+
+[node name="ShopButton" type="Button" parent="HUD/HBoxContainer/CenterContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Shop"
+
+[node name="Shop" type="CenterContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 1024)
+offset_right = 50.0
+offset_bottom = 284.0
+mouse_filter = 2
+script = ExtResource("2")
+
+[node name="Panel" type="Panel" parent="Shop"]
+modulate = Color(0.0941176, 0, 1, 0.678431)
+custom_minimum_size = Vector2(500, 924)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop"]
+custom_minimum_size = Vector2(500, 924)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HSeparator" type="HSeparator" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="BallAmount" type="HBoxContainer" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallAmount"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/BallAmount/TitleContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+
+[node name="BallAmountText" type="RichTextLabel" parent="Shop/VBoxContainer/BallAmount/TitleContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Amount of balls"
+scroll_active = false
+
+[node name="ValueContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallAmount"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/BallAmount/ValueContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BallTotalText" type="RichTextLabel" parent="Shop/VBoxContainer/BallAmount/ValueContainer"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "8"
+
+[node name="ButtonContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallAmount"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/BallAmount/ButtonContainer"]
+modulate = Color(0, 0.839216, 0.0705882, 0.635294)
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/VBoxContainer/BallAmount/ButtonContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonsHbox" type="HBoxContainer" parent="Shop/VBoxContainer/BallAmount/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallAmount/ButtonContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyBallsButton" type="Button" parent="Shop/VBoxContainer/BallAmount/ButtonContainer/VBoxContainer/BuyContainer"]
+modulate = Color(0, 1, 0.258824, 1)
+self_modulate = Color(0.396078, 1, 0, 1)
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="BuyBallsText" type="RichTextLabel" parent="Shop/VBoxContainer/BallAmount/ButtonContainer/VBoxContainer/BuyContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Buy for 200 tickets"
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="Shop/VBoxContainer"]
+layout_mode = 2
+
+[node name="BallType" type="HBoxContainer" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallType"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/BallType/TitleContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+
+[node name="BallTypeText" type="RichTextLabel" parent="Shop/VBoxContainer/BallType/TitleContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Ball Type"
+
+[node name="ValueContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallType"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/BallType/ValueContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BallNameText" type="RichTextLabel" parent="Shop/VBoxContainer/BallType/ValueContainer"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Original"
+
+[node name="ButtonContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallType"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/BallType/ButtonContainer"]
+modulate = Color(0, 0.839216, 0.0705882, 0.635294)
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/VBoxContainer/BallType/ButtonContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonsHbox" type="HBoxContainer" parent="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BallDownButton" type="Button" parent="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "<"
+
+[node name="BallUpButton" type="Button" parent="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = ">"
+
+[node name="BuyContainer" type="CenterContainer" parent="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyBallSkinButton" type="Button" parent="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/BuyContainer"]
+modulate = Color(0, 1, 0.258824, 1)
+self_modulate = Color(0.396078, 1, 0, 1)
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="BuyBallSkinText" type="RichTextLabel" parent="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/BuyContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Buy for 2000 tickets"
+scroll_active = false
+
+[node name="HSeparator3" type="HSeparator" parent="Shop/VBoxContainer"]
+layout_mode = 2
+
+[node name="HoopType" type="HBoxContainer" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleContainer" type="CenterContainer" parent="Shop/VBoxContainer/HoopType"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/HoopType/TitleContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+
+[node name="HoopTypeText" type="RichTextLabel" parent="Shop/VBoxContainer/HoopType/TitleContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Hoop Type"
+
+[node name="ValueContainer" type="CenterContainer" parent="Shop/VBoxContainer/HoopType"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/HoopType/ValueContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HoopNameText" type="RichTextLabel" parent="Shop/VBoxContainer/HoopType/ValueContainer"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Backyard"
+
+[node name="ButtonContainer" type="CenterContainer" parent="Shop/VBoxContainer/HoopType"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/HoopType/ButtonContainer"]
+modulate = Color(0, 0.839216, 0.0705882, 0.635294)
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/VBoxContainer/HoopType/ButtonContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonsHbox" type="HBoxContainer" parent="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HoopDownButton" type="Button" parent="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "<"
+
+[node name="HoopUpButton" type="Button" parent="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = ">"
+
+[node name="BuyContainer" type="CenterContainer" parent="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyHoopSkinButton" type="Button" parent="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/BuyContainer"]
+modulate = Color(0, 1, 0.258824, 1)
+self_modulate = Color(0.396078, 1, 0, 1)
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="BuyHoopSkinText" type="RichTextLabel" parent="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/BuyContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Buy for 5000 tickets"
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="Shop/VBoxContainer"]
+layout_mode = 2
+
+[node name="CageType" type="HBoxContainer" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleContainer" type="CenterContainer" parent="Shop/VBoxContainer/CageType"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/CageType/TitleContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+
+[node name="CageTypeText" type="RichTextLabel" parent="Shop/VBoxContainer/CageType/TitleContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Cage Type"
+
+[node name="ValueContainer" type="CenterContainer" parent="Shop/VBoxContainer/CageType"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/CageType/ValueContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CageNameText" type="RichTextLabel" parent="Shop/VBoxContainer/CageType/ValueContainer"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Ol' Red"
+
+[node name="ButtonContainer" type="CenterContainer" parent="Shop/VBoxContainer/CageType"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/CageType/ButtonContainer"]
+modulate = Color(0, 0.839216, 0.0705882, 0.635294)
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/VBoxContainer/CageType/ButtonContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonsHbox" type="HBoxContainer" parent="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CageDownButton" type="Button" parent="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "<"
+
+[node name="CageUpButton" type="Button" parent="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = ">"
+
+[node name="BuyContainer" type="CenterContainer" parent="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyCageSkinButton" type="Button" parent="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/BuyContainer"]
+modulate = Color(0, 1, 0.258824, 1)
+self_modulate = Color(0.396078, 1, 0, 1)
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="BuyCageSkinText" type="RichTextLabel" parent="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/BuyContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Buy for 10000 tickets"
+scroll_active = false
+
+[node name="HSeparator5" type="HSeparator" parent="Shop/VBoxContainer"]
+layout_mode = 2
+
+[node name="RoomType" type="HBoxContainer" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleContainer" type="CenterContainer" parent="Shop/VBoxContainer/RoomType"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/RoomType/TitleContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+
+[node name="RoomTypeText" type="RichTextLabel" parent="Shop/VBoxContainer/RoomType/TitleContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Room Type"
+
+[node name="ValueContainer" type="CenterContainer" parent="Shop/VBoxContainer/RoomType"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/RoomType/ValueContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RoomNameText" type="RichTextLabel" parent="Shop/VBoxContainer/RoomType/ValueContainer"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Musty Arcade"
+
+[node name="ButtonContainer" type="CenterContainer" parent="Shop/VBoxContainer/RoomType"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/RoomType/ButtonContainer"]
+modulate = Color(0, 0.839216, 0.0705882, 0.635294)
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/VBoxContainer/RoomType/ButtonContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonsHbox" type="HBoxContainer" parent="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RoomDownButton" type="Button" parent="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "<"
+
+[node name="RoomUpButton" type="Button" parent="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/ButtonsHbox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = ">"
+
+[node name="BuyContainer" type="CenterContainer" parent="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyRoomSkinButton" type="Button" parent="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/BuyContainer"]
+modulate = Color(0, 1, 0.258824, 1)
+self_modulate = Color(0.396078, 1, 0, 1)
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="BuyRoomSkinText" type="RichTextLabel" parent="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/BuyContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Buy for 50000 tickets"
+scroll_active = false
+
+[node name="HSeparator6" type="HSeparator" parent="Shop/VBoxContainer"]
+layout_mode = 2
+
+[node name="AimSkill" type="HBoxContainer" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleContainer" type="CenterContainer" parent="Shop/VBoxContainer/AimSkill"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/AimSkill/TitleContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+
+[node name="AimSkillText" type="RichTextLabel" parent="Shop/VBoxContainer/AimSkill/TitleContainer"]
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Aiming Skill Level"
+
+[node name="ValueContainer" type="CenterContainer" parent="Shop/VBoxContainer/AimSkill"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/AimSkill/ValueContainer"]
+modulate = Color(0.839216, 0, 0.803922, 0.635294)
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AimSkillText" type="RichTextLabel" parent="Shop/VBoxContainer/AimSkill/ValueContainer"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "0"
+
+[node name="ButtonContainer" type="CenterContainer" parent="Shop/VBoxContainer/AimSkill"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Shop/VBoxContainer/AimSkill/ButtonContainer"]
+modulate = Color(0, 0.839216, 0.0705882, 0.635294)
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/VBoxContainer/AimSkill/ButtonContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonsHbox" type="HBoxContainer" parent="Shop/VBoxContainer/AimSkill/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyContainer" type="CenterContainer" parent="Shop/VBoxContainer/AimSkill/ButtonContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuyAimLevelButton" type="Button" parent="Shop/VBoxContainer/AimSkill/ButtonContainer/VBoxContainer/BuyContainer"]
+modulate = Color(0, 1, 0.258824, 1)
+self_modulate = Color(0.396078, 1, 0, 1)
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="BuyAimLevelText" type="RichTextLabel" parent="Shop/VBoxContainer/AimSkill/ButtonContainer/VBoxContainer/BuyContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Upgrade for 500 tickets"
+scroll_active = false
+
+[node name="HSeparator7" type="HSeparator" parent="Shop/VBoxContainer"]
+layout_mode = 2
+
+[node name="ExitShopContainer" type="CenterContainer" parent="Shop/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ExitButton" type="Button" parent="Shop/VBoxContainer/ExitShopContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+
+[node name="ExitText" type="RichTextLabel" parent="Shop/VBoxContainer/ExitShopContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Back to Game"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Shop"]
+stream = SubResource("AudioStreamRandomizer_kud3k")
+bus = &"Click"
+
+[node name="CantSound" type="AudioStreamPlayer" parent="Shop"]
+stream = SubResource("AudioStreamRandomizer_877e3")
+pitch_scale = 0.55
+bus = &"Uhuh"
+
+[node name="BuySound" type="AudioStreamPlayer" parent="Shop"]
+stream = SubResource("AudioStreamRandomizer_cundi")
+pitch_scale = 0.53
+bus = &"Buy"
+
+[node name="Sandman" type="Node2D" parent="."]
+script = ExtResource("5")
+
+[node name="Time" type="Timer" parent="Sandman"]
+one_shot = true
+
+[node name="QuitQuery" type="CenterContainer" parent="."]
+visible = false
+mouse_filter = 2
+
+[node name="PanelRect" type="Panel" parent="QuitQuery"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuitQuery"]
+layout_mode = 2
+
+[node name="KeepPlayingButton" type="Button" parent="QuitQuery/VBoxContainer"]
+layout_mode = 2
+text = "Back to Game"
+
+[node name="QuitGameButton" type="Button" parent="QuitQuery/VBoxContainer"]
+layout_mode = 2
+text = "quit game"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_fuald")
+bus = &"Click"
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_TouchScreenButton_pressed"]
+[connection signal="released" from="TouchScreenButton" to="." method="_on_TouchScreenButton_released"]
+[connection signal="pressed" from="HUD/HBoxContainer/CenterContainer3/VBoxContainer/ShopButton" to="." method="_on_ShopButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/BallAmount/ButtonContainer/VBoxContainer/BuyContainer/BuyBallsButton" to="Shop" method="_on_BuyBallsButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/ButtonsHbox/BallDownButton" to="Shop" method="_on_BallDownButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/ButtonsHbox/BallUpButton" to="Shop" method="_on_BallUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/BallType/ButtonContainer/VBoxContainer/BuyContainer/BuyBallSkinButton" to="Shop" method="_on_BuyBallSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/ButtonsHbox/HoopDownButton" to="Shop" method="_on_HoopDownButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/ButtonsHbox/HoopUpButton" to="Shop" method="_on_HoopUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/HoopType/ButtonContainer/VBoxContainer/BuyContainer/BuyHoopSkinButton" to="Shop" method="_on_BuyHoopSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/ButtonsHbox/CageDownButton" to="Shop" method="_on_CageDownButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/ButtonsHbox/CageUpButton" to="Shop" method="_on_CageUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/CageType/ButtonContainer/VBoxContainer/BuyContainer/BuyCageSkinButton" to="Shop" method="_on_BuyCageSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/ButtonsHbox/RoomDownButton" to="Shop" method="_on_RoomDownButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/ButtonsHbox/RoomUpButton" to="Shop" method="_on_RoomUpButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/RoomType/ButtonContainer/VBoxContainer/BuyContainer/BuyRoomSkinButton" to="Shop" method="_on_BuyRoomSkinButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/AimSkill/ButtonContainer/VBoxContainer/BuyContainer/BuyAimLevelButton" to="Shop" method="_on_BuyAimLevelButton_pressed"]
+[connection signal="pressed" from="Shop/VBoxContainer/ExitShopContainer/ExitButton" to="Shop" method="_on_ExitButton_pressed"]
+[connection signal="timeout" from="Sandman/Time" to="Sandman" method="_on_Time_timeout"]
+[connection signal="pressed" from="QuitQuery/VBoxContainer/KeepPlayingButton" to="." method="_on_KeepPlayingButton_pressed"]
+[connection signal="pressed" from="QuitQuery/VBoxContainer/QuitGameButton" to="." method="_on_QuitGameButton_pressed"]

@@ -1,0 +1,187 @@
+[gd_scene load_steps=12 format=3 uid="uid://cjqos4pmaqwuo"]
+
+[ext_resource type="Texture2D" uid="uid://dsf2uxbvlqp1q" path="res://src/assets/texture/particle/ticket.png" id="1"]
+[ext_resource type="Script" path="res://src/scene/GameLevel.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://cwqy7hwo6a185" path="res://src/assets/sound/fx/blowhorn.mp3" id="3"]
+
+[sub_resource type="SphereShape3D" id="1"]
+radius = 108.52
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y4hao"]
+sky_top_color = Color(0.633745, 0.852142, 0.942933, 1)
+sky_horizon_color = Color(0.627875, 0.774912, 0.859231, 1)
+ground_bottom_color = Color(0.21099, 0.472228, 0.2881, 1)
+ground_horizon_color = Color(0.627451, 0.776471, 0.858824, 1)
+
+[sub_resource type="Sky" id="Sky_03htr"]
+sky_material = SubResource("ProceduralSkyMaterial_y4hao")
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+sky = SubResource("Sky_03htr")
+glow_enabled = true
+glow_intensity = 1.33
+glow_strength = 1.02
+glow_bloom = 0.14
+
+[sub_resource type="ParticleProcessMaterial" id="4"]
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(1, 0, -5)
+spread = 93.14
+flatness = 0.23
+gravity = Vector3(0, -8, 0)
+
+[sub_resource type="StandardMaterial3D" id="5"]
+albedo_texture = ExtResource("1")
+emission_enabled = true
+emission = Color(1, 0.470588, 0, 1)
+emission_energy_multiplier = 0.09
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="6"]
+material = SubResource("5")
+size = Vector3(1, 0.05, 0.5)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tax3u"]
+random_pitch = 1.56
+streams_count = 1
+stream_0/stream = ExtResource("3")
+stream_0/weight = 1.0
+
+[node name="GameLevel" type="Node3D"]
+script = ExtResource("2")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80639, 13.1022)
+current = true
+
+[node name="Listener" type="AudioListener3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695)
+current = true
+
+[node name="HearArea" type="Area3D" parent="Camera"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Camera/HearArea"]
+shape = SubResource("1")
+
+[node name="Camera2" type="Camera3D" parent="."]
+transform = Transform3D(0.957581, 0, 0.288163, 0, 1, 0, -0.288163, 0, 0.957581, 2.67449, 0.80639, 12.1997)
+
+[node name="Listener" type="AudioListener3D" parent="Camera2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695)
+current = true
+
+[node name="HearArea" type="Area3D" parent="Camera2"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Camera2/HearArea"]
+shape = SubResource("1")
+
+[node name="Camera3" type="Camera3D" parent="."]
+transform = Transform3D(0.990423, 0, -0.138067, 0, 1, 0, 0.138067, 0, 0.990423, -2.49632, 0.80639, 12.1997)
+
+[node name="Listener" type="AudioListener3D" parent="Camera3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695)
+current = true
+
+[node name="HearArea" type="Area3D" parent="Camera3"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Camera3/HearArea"]
+shape = SubResource("1")
+
+[node name="Camera4" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.956473, -0.291821, 0, 0.291821, 0.956473, 0, -1.78696, 12.6155)
+
+[node name="Listener" type="AudioListener3D" parent="Camera4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695)
+current = true
+
+[node name="HearArea" type="Area3D" parent="Camera4"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Camera4/HearArea"]
+shape = SubResource("1")
+
+[node name="Camera5" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.969488, 0.245138, 0, -0.245138, 0.969488, 0, 4.21583, 12.6155)
+
+[node name="Listener" type="AudioListener3D" parent="Camera5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695)
+current = true
+
+[node name="HearArea" type="Area3D" parent="Camera5"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Camera5/HearArea"]
+shape = SubResource("1")
+
+[node name="Camera6" type="Camera3D" parent="."]
+transform = Transform3D(0.87925, 0, 0.476361, 0, 1, 0, -0.476361, 0, 0.87925, 4.46257, 1.80573, 9.93975)
+
+[node name="Listener" type="AudioListener3D" parent="Camera6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695)
+current = true
+
+[node name="HearArea" type="Area3D" parent="Camera6"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Camera6/HearArea"]
+shape = SubResource("1")
+
+[node name="Camera7" type="Camera3D" parent="."]
+transform = Transform3D(0.926529, 0, -0.376224, 0, 1, 0, 0.376224, 0, 0.926529, -3.92969, 1.80573, 9.93975)
+
+[node name="Listener" type="AudioListener3D" parent="Camera7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60695)
+current = true
+
+[node name="HearArea" type="Area3D" parent="Camera7"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Camera7/HearArea"]
+shape = SubResource("1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("3")
+
+[node name="Shooter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.893879, 4.17631)
+
+[node name="TestShooter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.89698, -2.56008)
+
+[node name="HoopFocus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.671862, 3.66973)
+
+[node name="Spatial" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07381, -2.981)
+
+[node name="StreakTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TicketParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+emitting = false
+one_shot = true
+explosiveness = 0.43
+randomness = 0.72
+process_material = SubResource("4")
+draw_pass_1 = SubResource("6")
+
+[node name="HornSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_tax3u")
+pitch_scale = 0.75
+bus = &"Horn"
+
+[connection signal="timeout" from="StreakTimer" to="." method="_on_StreakTimer_timeout"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://iegaqvv4akov"]
+
+[ext_resource type="Script" path="res://src/scene/prefab/path/HoopPath.gd" id="2"]
+
+[sub_resource type="Curve3D" id="1"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.000623584, 0, -0.135052, 0, 0, 0, 0, 0, 0, 0.000623584, 0, -1.70262, 0, 0, 0, 0, 0, 0, 0.00762433, 1.39926, -1.76045, 0, 0, 0, 0, 0, 0, 0.000623584, 0, -0.135052),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="HoopPath1" type="Path3D"]
+curve = SubResource("1")
+script = ExtResource("2")
+
+[node name="PathFollow" type="PathFollow3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000623584, 0, -0.135052)
+rotation_mode = 0

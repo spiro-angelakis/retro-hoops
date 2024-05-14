@@ -1,0 +1,356 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Material" path="res://src/assets/material/matte_black.tres" id="1"]
+[ext_resource type="ArrayMesh" uid="uid://cunwmg3qyb67g" path="res://src/assets/obj/net/net2.obj" id="2"]
+[ext_resource type="Script" path="res://src/scene/prefab/cage/Cage.gd" id="3"]
+[ext_resource type="Material" uid="uid://d1eoy30gd15q1" path="res://src/assets/material/net1.tres" id="4"]
+[ext_resource type="Material" path="res://src/assets/material/matte_grey1.tres" id="5"]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+params_diffuse_mode = 4
+albedo_color = Color( 0.117647, 0.827451, 0.992157, 0.431373 )
+
+[sub_resource type="SphereMesh" id=3]
+material = SubResource( 2 )
+radial_segments = 8
+rings = 4
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "win"
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 5.0, 16.0, 8.0, 16.0, 4.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinLight:light_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.968627, 1, 0, 1 ), Color( 1, 0.470588, 0, 1 ), Color( 1, 0.937255, 0, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="CubeMesh" id=6]
+material = ExtResource( 4 )
+size = Vector3( 5, 0.5, 12 )
+subdivide_width = 4
+subdivide_height = 1
+subdivide_depth = 8
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 5.95609, 3.50468, 1.95605 )
+
+[node name="Cage7" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.00516 )
+use_collision = true
+
+[node name="Backwall" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.22326, -4.40009 )
+width = 5.1058
+height = 8.78848
+depth = 0.300821
+material = ExtResource( 1 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03113, -1.52675 )
+light_color = Color( 1, 1, 0.87451, 1 )
+omni_range = 6.5
+omni_attenuation = 1.36604
+
+[node name="net1" type="SoftBody" parent="."]
+transform = Transform( 0.999956, 0.00340326, 0.00876144, -0.0034034, 0.999994, 0, -0.00876138, -2.98187e-05, 0.999962, -2.82593, 1.43919, -2.90178 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/0/offset = Vector3( -2.89327, -0.115126, -0.612998 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/1/offset = Vector3( -2.56248, 3.79183, -5.31808 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/2/offset = Vector3( -2.89243, 1.91076, -1.30403 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/3/offset = Vector3( -2.51825, 3.79183, -0.269771 )
+
+[node name="net2" type="SoftBody" parent="."]
+transform = Transform( 0.994636, -0.0305626, -0.0988161, 0.0307129, 0.999528, 0, 0.0987695, -0.00303493, 0.995106, 2.51531, 1.43919, -2.80772 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/0/offset = Vector3( 0.446371, -1.64899, -1.29631 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/1/offset = Vector3( 0.50017, 0.634853, -6.97898 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/2/offset = Vector3( 1.1699, -0.164161, -2.65776 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/3/offset = Vector3( 2.89353, 1.16578, -2.56567 )
+
+[node name="net3" type="SoftBody" parent="."]
+transform = Transform( 0.999965, -0.00493352, 0.00680941, 0.00484141, 0.999897, 0.0134751, -0.00687524, -0.0134416, 0.999886, -2.92286, 0.77202, 1.77939 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/0/offset = Vector3( -2.9817, -0.751985, 4.08869 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/1/offset = Vector3( -2.67432, 3.09419, -0.667774 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/2/offset = Vector3( -2.9964, 1.2644, 3.37054 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/3/offset = Vector3( -2.63994, 3.16222, 4.38015 )
+
+[node name="net4" type="SoftBody" parent="."]
+transform = Transform( 0.997826, -0.0365443, -0.0548433, 0.0365562, 0.999331, -0.000786532, 0.0548354, -0.00122004, 0.998495, 2.28219, 0.77202, 1.86414 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/0/offset = Vector3( 2.1316, -0.786341, 4.14619 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/1/offset = Vector3( 2.60457, 3.13606, -0.533831 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/2/offset = Vector3( 2.09546, 1.23875, 3.45376 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/3/offset = Vector3( 2.32769, 3.13209, 4.50707 )
+
+[node name="net5" type="SoftBody" parent="."]
+transform = Transform( 0.999956, 0.00340326, 0.00876144, -0.0034034, 0.999994, 0, -0.00876138, -2.98187e-05, 0.999962, -2.82593, 6.2851, -2.90178 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/0/offset = Vector3( -2.89327, -0.115126, -0.612998 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/1/offset = Vector3( -2.56248, 3.79183, -5.31808 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/2/offset = Vector3( -2.89243, 1.91076, -1.30403 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/3/offset = Vector3( -2.51825, 3.79183, -0.269771 )
+
+[node name="net6" type="SoftBody" parent="."]
+transform = Transform( 0.994636, -0.0305626, -0.0988161, 0.0307129, 0.999528, 0, 0.0987695, -0.00303493, 0.995106, 2.51531, 6.2851, -2.80772 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/0/offset = Vector3( 0.446371, -1.64899, -1.29631 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/1/offset = Vector3( 0.50017, 0.634853, -6.97898 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/2/offset = Vector3( 1.1699, -0.164161, -2.65776 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/3/offset = Vector3( 2.89353, 1.16578, -2.56567 )
+
+[node name="net7" type="SoftBody" parent="."]
+transform = Transform( 0.999965, -0.00493352, 0.00680941, 0.00484141, 0.999897, 0.0134751, -0.00687524, -0.0134416, 0.999886, -2.92286, 5.61794, 1.77939 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/0/offset = Vector3( -2.9817, -0.751985, 4.08869 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/1/offset = Vector3( -2.67432, 3.09419, -0.667774 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/2/offset = Vector3( -2.9964, 1.2644, 3.37054 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall")
+attachments/3/offset = Vector3( -2.63994, 3.16222, 4.38015 )
+
+[node name="net8" type="SoftBody" parent="."]
+transform = Transform( 0.997826, -0.0365443, -0.0548433, 0.0365562, 0.999331, -0.000786532, 0.0548354, -0.00122004, 0.998495, 2.28219, 5.61794, 1.86414 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 281, 0, 280, 2 ]
+attachments/0/point_index = 281
+attachments/0/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/0/offset = Vector3( 2.1316, -0.786341, 4.14619 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/1/offset = Vector3( 2.60457, 3.13606, -0.533831 )
+attachments/2/point_index = 280
+attachments/2/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/2/offset = Vector3( 2.09546, 1.23875, 3.45376 )
+attachments/3/point_index = 2
+attachments/3/spatial_attachment_path = NodePath("../CSGCombiner/Wall2")
+attachments/3/offset = Vector3( 2.32769, 3.13209, 4.50707 )
+
+[node name="bottomnetpoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167797, -4.62797, 5.84962 )
+
+[node name="LightMesh" type="MeshInstance" parent="."]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 2.64389, -5.53554 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WinLight" type="OmniLight" parent="."]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 2.77476, -2.47099 )
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 0.0
+omni_range = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 4 )
+anims/win = SubResource( 5 )
+
+[node name="bottomnet" type="SoftBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.95097, -0.309283, 0, 0.309283, 0.95097, 0, -3.10303, 0.505742 )
+mesh = SubResource( 6 )
+material/0 = null
+simulation_precision = 1
+pressure_coefficient = 1.0
+pinned_points = [ 2, 0, 4, 6, 8, 10, 24, 26, 28, 30, 32, 34, 1, 3, 5, 7, 9, 11, 25, 27, 29, 31, 33, 35 ]
+attachments/0/point_index = 2
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3( 0, 0, 0 )
+attachments/1/point_index = 0
+attachments/1/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/1/offset = Vector3( -2.6678, -0.0930151, 0.439263 )
+attachments/2/point_index = 4
+attachments/2/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/2/offset = Vector3( -0.667797, -0.0930151, 0.439263 )
+attachments/3/point_index = 6
+attachments/3/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/3/offset = Vector3( 0.332203, -0.0930151, 0.439263 )
+attachments/4/point_index = 8
+attachments/4/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/4/offset = Vector3( 1.3322, -0.0930151, 0.439263 )
+attachments/5/point_index = 10
+attachments/5/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/5/offset = Vector3( 2.3322, -0.0930151, 0.439263 )
+attachments/6/point_index = 24
+attachments/6/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/6/offset = Vector3( -2.6678, -0.5685, 0.284622 )
+attachments/7/point_index = 26
+attachments/7/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/7/offset = Vector3( -1.6678, -0.5685, 0.284622 )
+attachments/8/point_index = 28
+attachments/8/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/8/offset = Vector3( -0.667797, -0.5685, 0.284622 )
+attachments/9/point_index = 30
+attachments/9/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/9/offset = Vector3( 0.332203, -0.5685, 0.284622 )
+attachments/10/point_index = 32
+attachments/10/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/10/offset = Vector3( 1.3322, -0.5685, 0.284622 )
+attachments/11/point_index = 34
+attachments/11/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/11/offset = Vector3( 2.3322, -0.5685, 0.284622 )
+attachments/12/point_index = 1
+attachments/12/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/12/offset = Vector3( 2.3322, 3.61838, -10.9724 )
+attachments/13/point_index = 3
+attachments/13/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/13/offset = Vector3( 1.3322, 3.61838, -10.9724 )
+attachments/14/point_index = 5
+attachments/14/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/14/offset = Vector3( 0.332203, 3.61838, -10.9724 )
+attachments/15/point_index = 7
+attachments/15/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/15/offset = Vector3( -0.667797, 3.61838, -10.9724 )
+attachments/16/point_index = 9
+attachments/16/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/16/offset = Vector3( -1.6678, 3.61838, -10.9724 )
+attachments/17/point_index = 11
+attachments/17/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/17/offset = Vector3( -2.6678, 3.61838, -10.9724 )
+attachments/18/point_index = 25
+attachments/18/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/18/offset = Vector3( 2.3322, 3.1429, -11.127 )
+attachments/19/point_index = 27
+attachments/19/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/19/offset = Vector3( 1.3322, 3.1429, -11.127 )
+attachments/20/point_index = 29
+attachments/20/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/20/offset = Vector3( 0.332203, 3.1429, -11.127 )
+attachments/21/point_index = 31
+attachments/21/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/21/offset = Vector3( -0.667797, 3.1429, -11.127 )
+attachments/22/point_index = 33
+attachments/22/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/22/offset = Vector3( -1.6678, 3.1429, -11.127 )
+attachments/23/point_index = 35
+attachments/23/spatial_attachment_path = NodePath("../bottomnetpoint")
+attachments/23/offset = Vector3( -2.6678, 3.1429, -11.127 )
+
+[node name="BallReturnArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.41487, 7.42272 )
+
+[node name="CollisionShape" type="CollisionShape" parent="BallReturnArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0882263 )
+shape = SubResource( 7 )
+
+[connection signal="body_entered" from="BallReturnArea" to="." method="_on_BallReturnArea_body_entered"]

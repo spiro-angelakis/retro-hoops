@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://djq2d0wirkkk1"]
+
+[ext_resource type="Script" path="res://src/scene/prefab/hoop/BallHoop.gd" id="1"]
+[ext_resource type="ArrayMesh" uid="uid://5fkvydujlyy0" path="res://src/assets/obj/hoopnet/hoop3.obj" id="2"]
+[ext_resource type="Material" uid="uid://fcnfmfepd220" path="res://src/assets/material/mirror_grey.tres" id="3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1vsjk"]
+material = ExtResource("3")
+size = Vector3(2, 2, 0.2)
+
+[sub_resource type="ConvexPolygonShape3D" id="4"]
+points = PackedVector3Array(-1, 1, 0.1, 1, 1, -0.1, 1, 1, 0.1, -1, 1, -0.1, -1, -1, 0.1, 1, -1, -0.1, 1, -1, 0.1, -1, -1, -0.1, 1, 1, 0.1, -1, 1, -0.1, 1, 1, -0.1, -1, 1, 0.1, 1, -1, 0.1, -1, -1, -0.1, 1, -1, -0.1, -1, -1, 0.1, 1, 1, 0.1, -1, -1, 0.1, -1, 1, 0.1, 1, -1, 0.1, 1, 1, -0.1, -1, -1, -0.1, -1, 1, -0.1, 1, -1, -0.1)
+
+[sub_resource type="BoxShape3D" id="7"]
+size = Vector3(0.398884, 0.18029, 0.378466)
+
+[node name="BallHoop4" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Backboard" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02347, -0.875929)
+
+[node name="MeshInstance" type="MeshInstance3D" parent="Backboard"]
+mesh = SubResource("BoxMesh_1vsjk")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Backboard"]
+shape = SubResource("4")
+
+[node name="Hoop" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("3")
+use_collision = true
+
+[node name="CSGTorus" type="CSGTorus3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326065, 0.336911)
+inner_radius = 0.874355
+outer_radius = 1.03282
+
+[node name="CSGBox" type="CSGBox3D" parent="Hoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30669, -0.742859)
+size = Vector3(0.841784, 0.2, 0.362351)
+
+[node name="ScoreArea" type="Area3D" parent="."]
+input_capture_on_drag = true
+
+[node name="CollisionShape" type="CollisionShape3D" parent="ScoreArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.220168, 0.373947)
+shape = SubResource("7")
+
+[node name="SoftBody" type="SoftBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.223282, 0.322393)
+mesh = ExtResource("2")
+surface_material_override/0 = ExtResource("3")
+pinned_points = [510, 549, 606, 679, 737, 811, 873, 6, 38, 92, 174, 315]
+attachments/0/point_index = 510
+attachments/0/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/0/offset = Vector3(-0.7568, -0.370647, 0.428582)
+attachments/1/point_index = 549
+attachments/1/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/1/offset = Vector3(-0.7317, -0.464947, -0.495118)
+attachments/2/point_index = 606
+attachments/2/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/2/offset = Vector3(0.4806, -0.592747, -0.746218)
+attachments/3/point_index = 679
+attachments/3/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/3/offset = Vector3(0, -0.549347, -0.014518)
+attachments/4/point_index = 737
+attachments/4/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/4/offset = Vector3(0, -0.549347, -0.014518)
+attachments/5/point_index = 811
+attachments/5/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/5/offset = Vector3(0, -0.549347, -0.014518)
+attachments/6/point_index = 873
+attachments/6/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/6/offset = Vector3(0, -0.549347, -0.014518)
+attachments/7/point_index = 6
+attachments/7/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/7/offset = Vector3(1, -0.370647, -0.014518)
+attachments/8/point_index = 38
+attachments/8/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/8/offset = Vector3(0.6311, -0.049347, 0.616582)
+attachments/9/point_index = 92
+attachments/9/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/9/offset = Vector3(0.1897, -1.04935, 0.888082)
+attachments/10/point_index = 174
+attachments/10/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/10/offset = Vector3(-0.8556, -1.04935, 0.421382)
+attachments/11/point_index = 315
+attachments/11/spatial_attachment_path = NodePath("../Hoop/CSGTorus")
+attachments/11/offset = Vector3(0.0503, -0.917847, -1.00452)
+
+[node name="OmniLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.292833, 0)
+
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_ScoreArea_body_entered"]

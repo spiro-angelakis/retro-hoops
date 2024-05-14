@@ -1,0 +1,118 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" uid="uid://dl2l4uavftjrn" path="res://src/scene/prefab/window/WindowFull.tscn" id="1"]
+[ext_resource type="Material" path="res://src/assets/material/matte_black.tres" id="2"]
+[ext_resource type="Material" path="res://src/assets/material/matte_grey1.tres" id="3"]
+[ext_resource type="Material" path="res://src/assets/material/carpet_black.tres" id="4"]
+
+[node name="RoomSkin4" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="." groups=[
+"hard",
+]]
+use_collision = true
+
+[node name="wall" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.987052, 0, -0.160398, 0, 1, 0, 0.160398, 0, 0.987052, -8.60741, 7.20377, -1.12867 )
+width = 2.04198
+height = 30.0247
+depth = 25.7373
+material = ExtResource( 2 )
+
+[node name="wall2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.989013, 0, 0.147827, 0, 1, 0, -0.147827, 0, 0.989013, 8.84881, 7.20377, -1.12867 )
+width = 2.04198
+height = 28.5073
+depth = 25.7373
+material = ExtResource( 2 )
+
+[node name="wall3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( -0.00371753, 0, 0.999993, 0, 1, 0, -0.999993, 0, -0.00371753, 0.190221, 7.20377, -14.7328 )
+width = 2.04198
+height = 29.2438
+depth = 15.3456
+material = ExtResource( 2 )
+
+[node name="hole" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.35259, 17.8486, -14.4707 )
+operation = 2
+width = 6.2402
+height = 6.35452
+depth = 6.51749
+material = ExtResource( 2 )
+
+[node name="hole3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53503, 17.8486, -14.4707 )
+operation = 2
+width = 6.2402
+height = 6.35452
+depth = 6.51749
+material = ExtResource( 2 )
+
+[node name="hole2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59225, 11.0581, -14.4707 )
+operation = 2
+width = 6.2402
+height = 6.35452
+depth = 6.51749
+material = ExtResource( 2 )
+
+[node name="hole4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83607, 11.0581, -14.4707 )
+operation = 2
+width = 6.2402
+height = 6.35452
+depth = 6.51749
+material = ExtResource( 2 )
+
+[node name="hole5" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59225, 4.20391, -14.4707 )
+operation = 2
+width = 6.2402
+height = 6.35452
+depth = 6.51749
+material = ExtResource( 2 )
+
+[node name="hole6" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83607, 4.20391, -14.4707 )
+operation = 2
+width = 6.2402
+height = 6.35452
+depth = 6.51749
+material = ExtResource( 2 )
+
+[node name="floor" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.399374, -8.51794, -1.52005 )
+width = 22.7517
+depth = 27.9988
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.2064, 0 )
+width = 23.2168
+depth = 25.7734
+material = ExtResource( 3 )
+
+[node name="WindowFull" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38665, 17.8293, -14.3954 )
+
+[node name="WindowFull2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53759, 17.723, -14.3954 )
+
+[node name="WindowFull3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38665, 11.0449, -14.3954 )
+
+[node name="WindowFull4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53759, 11.2348, -14.3954 )
+
+[node name="WindowFull5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38665, 3.93466, -14.3954 )
+
+[node name="WindowFull6" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53759, 4.12459, -14.3954 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.3772, -1.57141 )
+light_energy = 3.21
+omni_range = 66.0
+omni_attenuation = 3.249
