@@ -1,6 +1,6 @@
 # Retro Hoops
 
-![Retro Hoops Icon](https://github.com/spiro-angelakis/retro-hoops/blob/main/icon.png?raw=true)
+![Retro Hoops Icon](https://github.com/spiro-angelakis/retro-hoops/blob/main/Retro_Hoops_Godot_v4-2-2/icon.png?raw=true)
 
 An open source arcade basketball simulator game, in Godot Engine, version 4.2.2.
 The previous "old" version of the game was made in Godot Engine version 3.5.3.
